@@ -1,0 +1,2 @@
+# Desenvolvimento-e-Implementa-o-de-Sistemas-El-tricos-Automatizados-Compat-veis-com-SACE
+Desenvolvimento de uma solução integrada de SACE para uma instalação residencial, com controlo e supervisão de bombagem, iluminação e segurança. A solução integra Modbus, SCADA, Node-RED e InfluxDB para controlo, monitorização, processamento e armazenamento de dados, complementados por análise inteligente através de um LLM.
