@@ -1,0 +1,1438 @@
+{
+  "iluminacao": [
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz2",
+      "tempo_total_min": 2857.47,
+      "media_diaria_min": 204.11,
+      "ativacoes_total": 1880,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 91.2,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.04,
+        "2026-05-04": 5.8,
+        "2026-05-05": 4.21,
+        "2026-05-06": 4.78,
+        "2026-05-07": 2.07,
+        "2026-05-11": 0.95,
+        "2026-05-18": 3.14,
+        "2026-05-19": 9.27,
+        "2026-05-20": 7.2,
+        "2026-05-21": 5.23,
+        "2026-05-26": 3.15,
+        "2026-05-28": 0.42,
+        "2026-05-29": 0.66,
+        "2026-07-21": 0.73
+      },
+      "events_per_day": {
+        "2026-04-24": 897,
+        "2026-05-04": 464,
+        "2026-05-05": 429,
+        "2026-05-06": 8,
+        "2026-05-07": 7,
+        "2026-05-11": 10,
+        "2026-05-18": 8,
+        "2026-05-19": 9,
+        "2026-05-20": 5,
+        "2026-05-21": 4,
+        "2026-05-26": 4,
+        "2026-05-28": 19,
+        "2026-05-29": 3,
+        "2026-07-21": 13
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "11": 0.0,
+          "12": 33.58,
+          "13": 87.55,
+          "15": 6.96
+        },
+        "2026-05-04": {
+          "8": 2139.84,
+          "9": 3199.62,
+          "10": 918.83,
+          "11": 1057.88,
+          "12": 5219.58,
+          "13": 19.23,
+          "14": 670.88,
+          "16": 7664.44
+        },
+        "2026-05-05": {
+          "8": 2.26,
+          "10": 1235.97,
+          "12": 8518.98,
+          "13": 3433.93,
+          "14": 699.57,
+          "15": 1249.59
+        },
+        "2026-05-06": {
+          "8": 2655.49,
+          "10": 5413.81,
+          "13": 1102.96,
+          "15": 7207.57,
+          "16": 832.71
+        },
+        "2026-05-07": {
+          "8": 63.96,
+          "9": 1590.44,
+          "11": 5798.27
+        },
+        "2026-05-11": {
+          "8": 29.19,
+          "9": 3374.94
+        },
+        "2026-05-18": {
+          "8": 1.02,
+          "9": 2939.01,
+          "10": 4.1,
+          "13": 958.5,
+          "15": 4622.27,
+          "16": 2765.11
+        },
+        "2026-05-19": {
+          "11": 11578.75,
+          "15": 9069.48,
+          "16": 3359.26,
+          "17": 1277.34,
+          "19": 8076.92
+        },
+        "2026-05-20": {
+          "9": 3468.54,
+          "14": 16220.55,
+          "16": 6215.98
+        },
+        "2026-05-21": {
+          "11": 13444.56,
+          "13": 5401.06
+        },
+        "2026-05-26": {
+          "10": 1011.8,
+          "13": 10312.89
+        },
+        "2026-05-28": {
+          "13": 272.49,
+          "15": 318.64,
+          "16": 917.95
+        },
+        "2026-05-29": {
+          "8": 1377.06,
+          "9": 996.4
+        },
+        "2026-07-21": {
+          "9": 1.03,
+          "13": 1846.47,
+          "14": 763.2
+        }
+      },
+      "insight": "Vamos analisar os dados de iluminação!\n\n**Resumo**\n\nOs dados fornecidos correspondem a uma análise da iluminação em diferentes áreas de uma residência. Os dados são apresentados como um dicionário com informações sobre o sensor, tempo total e média diária de iluminação, atividades totais e hoje, hora pico e tempo médio de ativação.\n\n**Análise**\n\nCom base nos dados fornecidos, podemos extrair alguns insights interessantes:\n\n1. **Área mais iluminada**: A área \"Living room\" (Luz2) tem o maior tempo total de iluminação (2857,47 minutos), indicando que essa é a área mais utilizada e iluminada da residência.\n2. **Média diária de iluminação**: A média diária de iluminação para a \"Living room\" também é a maior (204,11 minutos), sugerindo que essa área é frequentemente usada durante o dia.\n3. **Ativações totais**: O número total de ativações da iluminação é de 1880, o que pode indicar uma boa utilização da iluminação natural durante o dia e uma utilização razoável da iluminação artificial à noite.\n4. **Ativações hoje**: O número de ativações hoje é de 13, o que pode sugerir um uso normal da iluminação na residência.\n5. **Tempo médio de ativação**: O tempo médio de ativação da iluminação é de 91,2 segundos, o que pode indicar que a iluminação é ativada por períodos relativamente curtos.\n\n**Insights**\n\nCom base na análise dos dados, podemos inferir que:\n\n* A \"Living room\" é a área mais utilizada e iluminada da residência.\n* A iluminação é usada de forma razoável durante o dia e à noite.\n* O uso da iluminação é normal e não há indicações de problemas ou necessidade de ajustes.\n\n**Sugestões**\n\nPara melhorar a eficiência da iluminação, podemos sugerir:\n\n* Considerar a instalação de sensores de movimento para reduzir o tempo de ativação da iluminação.\n* Verificar se há oportunidades para aproveitar a luz natural durante o dia, reduzindo a necessidade de iluminação artificial.\n* Analisar os dados em diferentes períodos do ano e dias da semana para identificar padrões e oportunidades de otimização.\n\nEssas são apenas algumas sugestões baseadas na análise dos dados. É importante considerar as especificidades da residência e das necessidades dos moradores para definir estratégias de otimização eficazes."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz3",
+      "tempo_total_min": 2359.68,
+      "media_diaria_min": 181.51,
+      "ativacoes_total": 1831,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 77.32,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.18,
+        "2026-05-04": 6.11,
+        "2026-05-05": 3.52,
+        "2026-05-06": 5.4,
+        "2026-05-07": 2.66,
+        "2026-05-11": 0.27,
+        "2026-05-18": 5.07,
+        "2026-05-19": 2.2,
+        "2026-05-20": 4.51,
+        "2026-05-21": 5.24,
+        "2026-05-26": 3.15,
+        "2026-05-28": 0.66,
+        "2026-05-29": 0.38
+      },
+      "events_per_day": {
+        "2026-04-24": 869,
+        "2026-05-04": 440,
+        "2026-05-05": 442,
+        "2026-05-06": 27,
+        "2026-05-07": 7,
+        "2026-05-11": 3,
+        "2026-05-18": 6,
+        "2026-05-19": 6,
+        "2026-05-20": 2,
+        "2026-05-21": 4,
+        "2026-05-26": 4,
+        "2026-05-28": 19,
+        "2026-05-29": 2
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "12": 28.04,
+          "13": 598.83,
+          "15": 3.88
+        },
+        "2026-05-04": {
+          "8": 1770.85,
+          "9": 3269.99,
+          "10": 662.49,
+          "11": 1788.15,
+          "12": 5674.23,
+          "13": 1487.92,
+          "16": 7343.82
+        },
+        "2026-05-05": {
+          "8": 613.49,
+          "10": 1085.44,
+          "12": 5461.18,
+          "13": 3552.03,
+          "14": 698.55,
+          "15": 1249.59
+        },
+        "2026-05-06": {
+          "8": 2654.69,
+          "10": 5758.84,
+          "12": 8757.75,
+          "13": 2207.73,
+          "16": 47.41
+        },
+        "2026-05-07": {
+          "9": 3778.21,
+          "11": 5796.45
+        },
+        "2026-05-11": {
+          "8": 26.95,
+          "9": 943.91
+        },
+        "2026-05-18": {
+          "10": 3.08,
+          "13": 10847.77,
+          "15": 4622.88,
+          "16": 2770.61
+        },
+        "2026-05-19": {
+          "9": 4541.8,
+          "15": 5.16,
+          "16": 3355.97,
+          "17": 19.1
+        },
+        "2026-05-20": {
+          "10": 3780.3,
+          "14": 12437.98
+        },
+        "2026-05-21": {
+          "11": 13440.66,
+          "13": 5412.36
+        },
+        "2026-05-26": {
+          "10": 1194.86,
+          "13": 10135.64
+        },
+        "2026-05-28": {
+          "13": 776.23,
+          "15": 320.06,
+          "16": 1280.17
+        },
+        "2026-05-29": {
+          "8": 1376.04
+        }
+      },
+      "insight": "Vamos analisar os dados de iluminação de forma simples e prática.\n\n**Luz3 (Kitchen)**\n\n*   O total de tempo em minutos que a luz foi ativada é **2359,68 minutos**, o que equivale a aproximadamente **39 horas e 19 minutos**.\n*   A média diária de tempo em minutos que a luz foi ativada é **181,51 minutos**, ou seja, cerca de **3 horas e 1 minuto** por dia.\n*   A quantidade total de ativações da luz desde o início dos dados é de **1831 vezes**. Hoje, ela foi ativada apenas **2 vezes**.\n*   Não há informações sobre a hora do pico de atividade da luz.\n\nEsses são os principais insights que podemos obter com esses dados:\n\n1.  A luz da cozinha (Luz3) está ativada por um total de cerca de 39 horas e 19 minutos desde o início dos dados.\n2.  Em média, a luz da cozinha é ativada por aproximadamente 3 horas e 1 minuto por dia.\n3.  A luz da cozinha foi ativada em total 1831 vezes desde o início dos dados, com apenas 2 ativações hoje.\n\nEssas informações podem ser úteis para identificar padrões de uso ou possíveis problemas com a iluminação na área da cozinha.\n\nLembre-se de que esses dados são baseados nos nomes e localizações específicas fornecidas no início do texto."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz4",
+      "tempo_total_min": 2082.06,
+      "media_diaria_min": 148.72,
+      "ativacoes_total": 946,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 132.05,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.01,
+        "2026-05-04": 3.66,
+        "2026-05-05": 1.23,
+        "2026-05-06": 4.98,
+        "2026-05-07": 0.05,
+        "2026-05-11": 0.95,
+        "2026-05-18": 3.21,
+        "2026-05-19": 6.84,
+        "2026-05-20": 7.44,
+        "2026-05-21": 5.24,
+        "2026-05-26": 0.33,
+        "2026-05-28": 0.43,
+        "2026-05-29": 0.28,
+        "2026-07-21": 0.05
+      },
+      "events_per_day": {
+        "2026-04-24": 427,
+        "2026-05-04": 13,
+        "2026-05-05": 436,
+        "2026-05-06": 22,
+        "2026-05-07": 0,
+        "2026-05-11": 5,
+        "2026-05-18": 8,
+        "2026-05-19": 7,
+        "2026-05-20": 4,
+        "2026-05-21": 4,
+        "2026-05-26": 2,
+        "2026-05-28": 15,
+        "2026-05-29": 1,
+        "2026-07-21": 2
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "13": 28.43,
+          "14": 4.91,
+          "15": 3.87
+        },
+        "2026-05-04": {
+          "8": 1767.61,
+          "9": 2408.29,
+          "10": 1381.18,
+          "11": 289.16,
+          "16": 7345.87
+        },
+        "2026-05-05": {
+          "8": 615.54,
+          "10": 440.8,
+          "12": 20.36,
+          "13": 3348.47
+        },
+        "2026-05-06": {
+          "8": 2323.45,
+          "10": 5047.96,
+          "12": 7432.43,
+          "13": 3098.12,
+          "16": 14.24
+        },
+        "2026-05-07": {
+          "8": 184.77
+        },
+        "2026-05-11": {
+          "8": 33.27,
+          "9": 3370.05
+        },
+        "2026-05-18": {
+          "9": 2300.31,
+          "13": 1169.41,
+          "15": 5283.94,
+          "16": 2805.8
+        },
+        "2026-05-19": {
+          "11": 10031.87,
+          "15": 1894.75,
+          "16": 3356.78,
+          "17": 18.08,
+          "19": 9331.7
+        },
+        "2026-05-20": {
+          "9": 3472.64,
+          "10": 3778.42,
+          "14": 12437.57,
+          "16": 7104.33
+        },
+        "2026-05-21": {
+          "11": 13440.46,
+          "13": 5409.89
+        },
+        "2026-05-26": {
+          "10": 1199.13
+        },
+        "2026-05-28": {
+          "13": 271.47,
+          "15": 3.89,
+          "16": 1280.61
+        },
+        "2026-05-29": {
+          "9": 997.42
+        },
+        "2026-07-21": {
+          "16": 176.46
+        }
+      },
+      "insight": "**Análise de Dados de Iluminação**\n\nCom base nos dados fornecidos, irei realizar uma análise simples e prática das informações disponíveis.\n\n### Resumo Geral\n\nO conjunto de dados corresponde à iluminação da área chamada \"Living Area\" (Luz4). As principais características destacadas são:\n\n*   Tempo total de funcionamento em minutos: 2082,06\n*   Média diária de funcionamento em minutos: 148,72\n*   Número total de ativações: 946\n*   Número de ativações no dia atual: 2\n\n### Análise Detalhada\n\nO tempo médio de ativação da iluminação é de aproximadamente 132,05 segundos. Além disso, não há registros de alertas associados à iluminação.\n\n### Ponto de Pico\n\nInfelizmente, não há informação disponível sobre o ponto de pico de funcionamento da iluminação.\n\n### Observações Finais\n\nEm resumo, a iluminação do \"Living Area\" apresenta um padrão de utilização moderado, com um número significativo de ativações ao longo do tempo. No entanto, é fundamental investigar os fatores que influenciam o comportamento da iluminação e identificar áreas para melhoria ou otimização.\n\n**Considerações Finais**\n\nEssa análise pode ser utilizada como ponto de partida para uma investigação mais aprofundada. É essencial explorar as causas subjacentes à frequência e duração das ativações, bem como verificar se há possibilidade de ajuste ou automatização do sistema de iluminação para reduzir consumo energético e aumentar a eficiência.\n\n### Dicas para Melhoria\n\n*   **Verificar a programação da iluminação**: Certifique-se de que as configurações de horário e automação estejam corretas e atualizadas.\n*   **Monitorar os padrões de utilização**: Analise regularmente os dados de ativação para identificar tendências ou necessidades especiais que possam estar influenciando a frequência de uso da iluminação.\n*   **Considerar o uso de tecnologias inteligentes**: Avalie a implementação de sistemas de automação mais avançados, como sensores de movimento ou controle remoto, para otimizar a utilização da energia.\n\nEssas recomendações podem ajudar a melhorar a eficiência e reduzir o consumo energético do sistema de iluminação, além de fornecer informações valiosas sobre os padrões de comportamento dos usuários."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz5",
+      "tempo_total_min": 2267.17,
+      "media_diaria_min": 161.94,
+      "ativacoes_total": 1404,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 96.89,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.15,
+        "2026-05-04": 3.55,
+        "2026-05-05": 1.42,
+        "2026-05-06": 5.09,
+        "2026-05-07": 5.13,
+        "2026-05-11": 0.11,
+        "2026-05-18": 7.54,
+        "2026-05-19": 5.24,
+        "2026-05-20": 1.05,
+        "2026-05-21": 5.23,
+        "2026-05-26": 0.33,
+        "2026-05-28": 0.56,
+        "2026-05-29": 0.38,
+        "2026-07-21": 2.02
+      },
+      "events_per_day": {
+        "2026-04-24": 431,
+        "2026-05-04": 430,
+        "2026-05-05": 447,
+        "2026-05-06": 20,
+        "2026-05-07": 8,
+        "2026-05-11": 2,
+        "2026-05-18": 8,
+        "2026-05-19": 8,
+        "2026-05-20": 3,
+        "2026-05-21": 4,
+        "2026-05-26": 3,
+        "2026-05-28": 21,
+        "2026-05-29": 2,
+        "2026-07-21": 17
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "13": 16.6,
+          "14": 39.91,
+          "15": 470.26
+        },
+        "2026-05-04": {
+          "8": 2046.35,
+          "9": 2438.23,
+          "10": 652.24,
+          "11": 297.13,
+          "16": 7345.27
+        },
+        "2026-05-05": {
+          "8": 614.09,
+          "10": 103.9,
+          "12": 21.19,
+          "13": 2372.85,
+          "14": 697.51,
+          "15": 1289.96
+        },
+        "2026-05-06": {
+          "8": 331.83,
+          "12": 7432.43,
+          "13": 2608.79,
+          "15": 7909.45,
+          "16": 29.46
+        },
+        "2026-05-07": {
+          "8": 69.22,
+          "9": 3778.21,
+          "11": 5798.27,
+          "16": 8805.69
+        },
+        "2026-05-11": {
+          "9": 392.77
+        },
+        "2026-05-18": {
+          "9": 2298.48,
+          "10": 5462.3,
+          "13": 12007.11,
+          "15": 4618.99,
+          "16": 2765.72
+        },
+        "2026-05-19": {
+          "9": 4543.03,
+          "11": 1596.32,
+          "15": 2.87,
+          "16": 3355.75,
+          "17": 18.29,
+          "19": 9331.69
+        },
+        "2026-05-20": {
+          "10": 3778.42,
+          "14": 2.07
+        },
+        "2026-05-21": {
+          "11": 13436.17,
+          "13": 5403.73
+        },
+        "2026-05-26": {
+          "10": 1185.63
+        },
+        "2026-05-28": {
+          "13": 774.39,
+          "15": 321.08,
+          "16": 917.15
+        },
+        "2026-05-29": {
+          "8": 1376.04
+        },
+        "2026-07-21": {
+          "10": 2956.09,
+          "11": 1954.13,
+          "13": 2187.54,
+          "16": 175.43
+        }
+      },
+      "insight": "Vamos analisar os dados de iluminação!\n\n**Observações Iniciais**\n\nOs dados fornecidos correspondem à \"Machinery Room\" (Luz5). Aqui estão algumas observações iniciais:\n\n* A iluminação total da sala foi de aproximadamente **2267,17 minutos** ao longo do tempo registrado.\n* A média diária de iluminação foi de cerca de **161,94 minutos**, o que sugere uma atividade constante ao longo do dia.\n* Houve um total de **1404** acionamentos da luz durante esse período.\n* Hoje, houve apenas **17** acionamentos da luz, o que pode indicar uma redução na atividade.\n\n**Análise Detalhada**\n\nVamos analisar os dados com mais detalhe:\n\n1. **Tempo total de iluminação**: 2267,17 minutos é um valor considerável, sugerindo que a sala está sempre iluminada, o que pode ser necessário para segurança e funcionalidade.\n2. **Média diária de iluminação**: 161,94 minutos é uma boa indicação de como a luz é utilizada ao longo do dia. No entanto, isso pode variar dependendo da atividade da sala.\n3. **Acionamentos totais**: 1404 acionamentos em um período não especificado podem indicar que a luz está sendo usada intensamente ou que há problemas com a iluminação.\n4. **Acionamentos hoje**: 17 acionamentos hoje pode ser um indicador de uma redução na atividade da sala, o que pode justificar uma revisão da iluminação.\n\n**Insights**\n\nCom base nos dados fornecidos, podemos tirar algumas conclusões:\n\n1. A Machinery Room é uma área com alto nível de atividade, pois a luz está sempre ligada.\n2. Há necessidade de ajustes na iluminação para reduzir o número de acionamentos e consumo de energia.\n3. É importante verificar se há problemas com a iluminação que possam estar causando os altos níveis de acionamentos.\n\nEssas são apenas algumas observações baseadas nos dados fornecidos. Se você tiver mais dados ou informações adicionais, posso ajudar a analisá-los ainda melhor!"
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz6",
+      "tempo_total_min": 2524.96,
+      "media_diaria_min": 194.23,
+      "ativacoes_total": 1346,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 112.55,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.01,
+        "2026-05-04": 5.74,
+        "2026-05-05": 3.65,
+        "2026-05-06": 7.26,
+        "2026-05-11": 0.14,
+        "2026-05-18": 3.28,
+        "2026-05-19": 7.56,
+        "2026-05-20": 5.31,
+        "2026-05-21": 5.23,
+        "2026-05-26": 3.15,
+        "2026-05-28": 0.33,
+        "2026-05-29": 0.38,
+        "2026-07-21": 0.05
+      },
+      "events_per_day": {
+        "2026-04-24": 421,
+        "2026-05-04": 426,
+        "2026-05-05": 427,
+        "2026-05-06": 25,
+        "2026-05-11": 3,
+        "2026-05-18": 6,
+        "2026-05-19": 8,
+        "2026-05-20": 3,
+        "2026-05-21": 4,
+        "2026-05-26": 3,
+        "2026-05-28": 14,
+        "2026-05-29": 2,
+        "2026-07-21": 4
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "13": 20.1,
+          "14": 10.62,
+          "15": 2.85
+        },
+        "2026-05-04": {
+          "8": 2011.27,
+          "9": 2442.31,
+          "10": 644.92,
+          "11": 2530.38,
+          "12": 5673.24,
+          "16": 7345.89
+        },
+        "2026-05-05": {
+          "8": 613.06,
+          "10": 442.95,
+          "12": 8517.99,
+          "13": 3549.18
+        },
+        "2026-05-06": {
+          "8": 2322.64,
+          "10": 5049.19,
+          "12": 7432.43,
+          "13": 2591.35,
+          "15": 7909.45,
+          "16": 834.36
+        },
+        "2026-05-11": {
+          "8": 26.55,
+          "9": 488.94
+        },
+        "2026-05-18": {
+          "9": 2302.59,
+          "13": 637.38,
+          "15": 5278.2,
+          "16": 3578.92
+        },
+        "2026-05-19": {
+          "11": 5488.63,
+          "13": 1.01,
+          "15": 8994.74,
+          "16": 3354.32,
+          "17": 21.15,
+          "19": 9339.48
+        },
+        "2026-05-20": {
+          "9": 2906.86,
+          "10": 3776.36,
+          "14": 12436.34
+        },
+        "2026-05-21": {
+          "11": 13440.46,
+          "13": 5404.76
+        },
+        "2026-05-26": {
+          "10": 4.91,
+          "13": 11329.68
+        },
+        "2026-05-28": {
+          "13": 275.58,
+          "16": 917.15
+        },
+        "2026-05-29": {
+          "8": 1375.02
+        },
+        "2026-07-21": {
+          "16": 174.41
+        }
+      },
+      "insight": "**Análise de Iluminação**\n\nCom base nos dados fornecidos, podemos analisar a iluminação do local \"Bathroom 0\" (Luz6) da seguinte forma:\n\n### Dados Gerais\n\n*   **Tempo total de luz**: 2.524,96 minutos\n*   **Média diária de luz**: 194,23 minutos\n*   **Número total de ativizações**: 1.346\n*   **Número de ativizações hoje**: 4\n*   **Hora do pico** (não fornecida)\n\n### Tempo Médio de Ativação\n\nO tempo médio de ativação da iluminação é de aproximadamente 112,55 segundos.\n\n### Alertas\n\nNão há alertas registrados para o local \"Bathroom 0\".\n\n### Observações\n\n*   O número total de ativizações é maior do que a média diária de luz, o que pode indicar que a iluminação é usada mais frequentemente em alguns períodos específicos.\n*   A falta de hora do pico pode sugerir que a iluminação não está ligando-se ou desligando-se com regularidade durante um período específico do dia.\n\nEssas observações podem ser úteis para identificar padrões de comportamento e ajustar a configuração da iluminação do \"Bathroom 0\" se necessário."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz7",
+      "tempo_total_min": 2267.8,
+      "media_diaria_min": 161.99,
+      "ativacoes_total": 947,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 143.68,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 1.32,
+        "2026-05-04": 4.69,
+        "2026-05-05": 1.82,
+        "2026-05-06": 4.77,
+        "2026-05-07": 2.81,
+        "2026-05-11": 0.14,
+        "2026-05-18": 4.02,
+        "2026-05-19": 4.06,
+        "2026-05-20": 5.31,
+        "2026-05-21": 5.22,
+        "2026-05-26": 2.86,
+        "2026-05-28": 0.35,
+        "2026-05-29": 0.38,
+        "2026-07-21": 0.05
+      },
+      "events_per_day": {
+        "2026-04-24": 429,
+        "2026-05-04": 7,
+        "2026-05-05": 436,
+        "2026-05-06": 21,
+        "2026-05-07": 5,
+        "2026-05-11": 2,
+        "2026-05-18": 9,
+        "2026-05-19": 5,
+        "2026-05-20": 3,
+        "2026-05-21": 9,
+        "2026-05-26": 1,
+        "2026-05-28": 16,
+        "2026-05-29": 2,
+        "2026-07-21": 2
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "13": 32.85,
+          "14": 3864.38,
+          "15": 843.98
+        },
+        "2026-05-04": {
+          "8": 469.09,
+          "9": 2440.25,
+          "10": 649.8,
+          "11": 294.27,
+          "12": 5674.28,
+          "16": 7346.31
+        },
+        "2026-05-05": {
+          "8": 613.68,
+          "10": 430.55,
+          "12": 10.88,
+          "13": 3552.03,
+          "14": 697.51,
+          "15": 1249.59
+        },
+        "2026-05-06": {
+          "8": 327.31,
+          "12": 7429.76,
+          "13": 1499.51,
+          "15": 7909.45
+        },
+        "2026-05-07": {
+          "8": 475.37,
+          "9": 3830.11,
+          "11": 5797.25
+        },
+        "2026-05-11": {
+          "8": 21.99,
+          "9": 488.94
+        },
+        "2026-05-18": {
+          "9": 5246.9,
+          "10": 2.65,
+          "13": 1161.82,
+          "14": 649.7,
+          "15": 4647.78,
+          "16": 2768.76
+        },
+        "2026-05-19": {
+          "15": 1898.61,
+          "16": 3349.2,
+          "17": 21.15,
+          "19": 9342.15
+        },
+        "2026-05-20": {
+          "9": 2905.42,
+          "10": 3776.36,
+          "14": 12435.93
+        },
+        "2026-05-21": {
+          "11": 13438.01,
+          "12": 26.36,
+          "13": 4536.48,
+          "14": 802.99
+        },
+        "2026-05-26": {
+          "13": 10312.92
+        },
+        "2026-05-28": {
+          "13": 275.58,
+          "15": 53.28,
+          "16": 919.21
+        },
+        "2026-05-29": {
+          "8": 1375.43
+        },
+        "2026-07-21": {
+          "16": 172.36
+        }
+      },
+      "insight": "### Análise dos Dados de Iluminação\n\n#### Introdução\n\nOs dados fornecidos mostram a atividade da luz no local \"Garage\" (Luz7). Vamos analisar estes dados para entender melhor como a iluminação está sendo utilizada nesse local.\n\n#### Análise dos Dados\n\n- **Tempo Total de Uso:** O tempo total de uso da luz, medido em minutos, é de 2267.8 minutos.\n- **Média Diária de Uso:** A média diária de uso da luz é de aproximadamente 161.99 minutos.\n- **Número de Ativações:** O número total de ativações (ligar e desligar) da luz é de 947 vezes, com 2 ativações apenas hoje.\n- **Tempo Médio de Uso:** O tempo médio de uso da luz quando ativada é de aproximadamente 143.68 segundos.\n\n#### Observações Importantes\n\n- A luz no \"Garage\" está sendo utilizada de forma significativa, sugerindo que o espaço pode estar sendo usado com frequência.\n- O número de ativações hoje em dia (2) não é muito alto em comparação com o total, sugerindo padrões regulares de uso ou possivelmente uma intervenção humana para ajustar a iluminação.\n- Não há registro de pico de hora, sugerindo que o uso da luz é bastante uniforme ao longo do dia.\n\n#### Sugestões e Considerações\n\n- Poderia ser útil explorar mais os padrões de uso para entender melhor quando e por quem a luz está sendo utilizada. Isso pode ajudar a identificar oportunidades para otimizar a eficiência energética ou garantir segurança.\n- A ausência de alertas é um sinal positivo em termos de manutenção da iluminação.\n\nEssa análise fornece uma visão geral do uso da luz no \"Garage\" e pode servir como ponto de partida para investigações mais profundas ou ajustes na gestão da iluminação."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz8",
+      "tempo_total_min": 1989.19,
+      "media_diaria_min": 165.77,
+      "ativacoes_total": 490,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 243.57,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.0,
+        "2026-05-04": 3.29,
+        "2026-05-05": 3.53,
+        "2026-05-06": 2.63,
+        "2026-05-07": 2.58,
+        "2026-05-11": 0.14,
+        "2026-05-18": 3.65,
+        "2026-05-19": 7.29,
+        "2026-05-20": 5.31,
+        "2026-05-21": 1.28,
+        "2026-05-26": 3.1,
+        "2026-05-28": 0.35
+      },
+      "events_per_day": {
+        "2026-04-24": 0,
+        "2026-05-04": 2,
+        "2026-05-05": 429,
+        "2026-05-06": 6,
+        "2026-05-07": 11,
+        "2026-05-11": 2,
+        "2026-05-18": 9,
+        "2026-05-19": 6,
+        "2026-05-20": 3,
+        "2026-05-21": 8,
+        "2026-05-26": 1,
+        "2026-05-28": 13
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "15": 2.85
+        },
+        "2026-05-04": {
+          "9": 7098.71,
+          "11": 4734.77,
+          "13": 1.01
+        },
+        "2026-05-05": {
+          "9": 5.74,
+          "10": 269.28,
+          "12": 8895.54,
+          "13": 3554.28
+        },
+        "2026-05-06": {
+          "8": 2649.17,
+          "10": 5047.14,
+          "13": 1757.81,
+          "16": 1.85
+        },
+        "2026-05-07": {
+          "8": 219.67,
+          "9": 3279.55,
+          "11": 5797.25
+        },
+        "2026-05-11": {
+          "8": 24.07,
+          "9": 488.94
+        },
+        "2026-05-18": {
+          "8": 1.65,
+          "10": 5519.76,
+          "13": 4.71,
+          "14": 4.11,
+          "15": 3991.38,
+          "16": 3615.35
+        },
+        "2026-05-19": {
+          "9": 4555.53,
+          "11": 1599.43,
+          "15": 8629.06,
+          "16": 3347.14,
+          "17": 41.27,
+          "19": 8084.11
+        },
+        "2026-05-20": {
+          "9": 2908.91,
+          "10": 3774.08,
+          "14": 12433.85
+        },
+        "2026-05-21": {
+          "12": 33.02,
+          "13": 4558.5
+        },
+        "2026-05-26": {
+          "13": 11153.37
+        },
+        "2026-05-28": {
+          "16": 1268.3
+        }
+      },
+      "insight": "Vamos analisar os dados de iluminação!\n\n**Resumo**\n\nOs dados fornecem informações sobre a luz no quarto 1 (Bedroom 1, correspondente à \"Luz8\"). Aqui estão os principais pontos:\n\n*   **Tempo total minuto**: O tempo total em que a luz foi ativada é de aproximadamente 1989,19 minutos.\n*   **Média diária minuto**: A média diária em que a luz foi ativada é de aproximadamente 165,77 minutos.\n*   **Ativações totais**: A luz foi ativada um total de 490 vezes.\n*   **Ativações hoje**: Não há ativações registradas para hoje.\n*   **Hora do pico**: Não há registro da hora em que a luz atingiu o pico de uso.\n*   **Tempo médio de ativação (segundos)**: O tempo médio em que a luz está ativada é de aproximadamente 243,57 segundos.\n\n**Insights**\n\nCom base nos dados, podemos inferir que:\n\n*   A luz do quarto 1 é usada frequentemente durante o dia e a noite.\n*   A média diária de uso da luz é relativamente alta, indicando que a iluminação pode ser necessária para atividades noturnas ou até mesmo como luz de segurança.\n*   O fato de não ter ativações registradas hoje sugere que a iluminação do quarto 1 pode estar automaticamente desligada durante o dia.\n\nAlém disso, os dados sugerem que a iluminação é uma preocupação importante na residência, e talvez seja recomendável explorar formas de otimizar seu uso para economia de energia."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz9",
+      "tempo_total_min": 2030.06,
+      "media_diaria_min": 184.55,
+      "ativacoes_total": 901,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 135.19,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.57,
+        "2026-05-04": 3.23,
+        "2026-05-05": 4.0,
+        "2026-05-06": 4.28,
+        "2026-05-07": 0.0,
+        "2026-05-11": 0.01,
+        "2026-05-18": 6.23,
+        "2026-05-19": 4.91,
+        "2026-05-20": 7.44,
+        "2026-05-26": 3.1,
+        "2026-05-28": 0.08
+      },
+      "events_per_day": {
+        "2026-04-24": 430,
+        "2026-05-04": 0,
+        "2026-05-05": 434,
+        "2026-05-06": 8,
+        "2026-05-07": 0,
+        "2026-05-11": 2,
+        "2026-05-18": 10,
+        "2026-05-19": 7,
+        "2026-05-20": 5,
+        "2026-05-26": 2,
+        "2026-05-28": 3
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "14": 19.41,
+          "15": 5.12,
+          "16": 2010.68
+        },
+        "2026-05-04": {
+          "9": 7098.1,
+          "11": 4515.43
+        },
+        "2026-05-05": {
+          "9": 5.13,
+          "10": 9.84,
+          "12": 8896.56,
+          "13": 3554.28,
+          "14": 693.39,
+          "15": 1249.59
+        },
+        "2026-05-06": {
+          "8": 2647.76,
+          "10": 5045.29,
+          "13": 718.64,
+          "15": 6978.36
+        },
+        "2026-05-07": {
+          "8": 6.14
+        },
+        "2026-05-11": {
+          "8": 24.07
+        },
+        "2026-05-18": {
+          "9": 2291.74,
+          "10": 4.09,
+          "13": 12001.54,
+          "15": 5276.61,
+          "16": 2839.23
+        },
+        "2026-05-19": {
+          "11": 11630.67,
+          "15": 1424.17,
+          "17": 4612.59
+        },
+        "2026-05-20": {
+          "8": 555.49,
+          "9": 2908.5,
+          "10": 3774.71,
+          "16": 19552.22
+        },
+        "2026-05-26": {
+          "13": 11153.37
+        },
+        "2026-05-28": {
+          "13": 267.79,
+          "15": 33.01
+        }
+      },
+      "insight": "**Análise dos Dados de Iluminação**\n\nCom os dados fornecidos, vamos analisar a iluminação da casa em relação à localização \"Luz9\", que corresponde ao \"Bedroom 2\".\n\n### Dados Gerais\n\n*   **Total de tempo acionado (minutos):** 2030.06 minutos\n*   **Média diária de tempo acionado (minutos):** 184.55 minutos\n*   **Número total de ativações:** 901\n*   **Ativações no dia atual:** 0\n\n### Tempo Médio de Ativação\n\nO tempo médio de atividade em segundos é de 135,19 segundos.\n\n### Pico de Atividade (HORA)\n\nNão há dados disponíveis sobre a hora do pico de atividade, ou seja, quando a iluminação foi acionada mais frequentemente.\n\n### Alertas\n\nNão há alertas registrados para o local \"Luz9\".\n\nCom esses dados, podemos concluir que o Bedroom 2 é um ambiente que está bastante ocupado e que tem uma média diária de tempo acionado significativo."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz10",
+      "tempo_total_min": 2066.45,
+      "media_diaria_min": 158.96,
+      "ativacoes_total": 922,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 134.48,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.58,
+        "2026-05-04": 3.23,
+        "2026-05-05": 4.02,
+        "2026-05-06": 5.69,
+        "2026-05-07": 2.82,
+        "2026-05-11": 0.14,
+        "2026-05-18": 6.36,
+        "2026-05-19": 1.68,
+        "2026-05-20": 7.29,
+        "2026-05-21": 1.5,
+        "2026-05-26": 0.23,
+        "2026-05-28": 0.25,
+        "2026-05-29": 0.66
+      },
+      "events_per_day": {
+        "2026-04-24": 425,
+        "2026-05-04": 0,
+        "2026-05-05": 432,
+        "2026-05-06": 18,
+        "2026-05-07": 6,
+        "2026-05-11": 3,
+        "2026-05-18": 9,
+        "2026-05-19": 5,
+        "2026-05-20": 5,
+        "2026-05-21": 1,
+        "2026-05-26": 2,
+        "2026-05-28": 13,
+        "2026-05-29": 3
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "15": 18.19,
+          "16": 2067.3
+        },
+        "2026-05-04": {
+          "9": 7098.91,
+          "11": 4518.28
+        },
+        "2026-05-05": {
+          "9": 4.72,
+          "10": 69.25,
+          "12": 8894.72,
+          "13": 3556.12,
+          "14": 694.63,
+          "15": 1249.59
+        },
+        "2026-05-06": {
+          "8": 330.45,
+          "10": 1776.77,
+          "12": 8757.92,
+          "13": 2410.11,
+          "15": 7214.62
+        },
+        "2026-05-07": {
+          "8": 524.31,
+          "9": 3830.11,
+          "11": 5797.25
+        },
+        "2026-05-11": {
+          "8": 24.07,
+          "9": 490.17
+        },
+        "2026-05-18": {
+          "9": 2935.93,
+          "10": 5.7,
+          "13": 11719.92,
+          "15": 4608.2,
+          "16": 3617.53
+        },
+        "2026-05-19": {
+          "15": 1420.06,
+          "16": 3346.53,
+          "17": 1269.92
+        },
+        "2026-05-20": {
+          "9": 2908.9,
+          "10": 3772.61,
+          "14": 12432.83,
+          "16": 7118.98
+        },
+        "2026-05-21": {
+          "13": 5417.07
+        },
+        "2026-05-26": {
+          "10": 835.14
+        },
+        "2026-05-28": {
+          "16": 884.23
+        },
+        "2026-05-29": {
+          "8": 1372.35,
+          "9": 993.34
+        }
+      },
+      "insight": "Vamos analisar os dados de iluminação!\n\n**Resumo Geral**\n\nOs dados fornecidos referem-se ao local \"Bedroom 3\" (Luz10). Aqui estão alguns insights importantes:\n\n1. **Tempo Total de Uso**: A iluminação do quarto está em uso por cerca de 2066,45 minutos no total.\n2. **Média Diária de Uso**: A iluminação do quarto é usada por aproximadamente 158,96 minutos por dia.\n3. **Número de Ativações**: Foram realizadas 922 ativações da luz em todo o período considerado.\n4. **Ativações Hoje**: Foi realizado apenas 3 ativações da luz hoje.\n5. **Hora do Pico**: Não há hora específica registrada como pico de atividade da luz.\n\n**Detalhes Interessantes**\n\n* O tempo médio de ativação da luz é de aproximadamente 134,48 segundos.\n* Não há alertas registrados para a iluminação do quarto.\n\nEsses dados podem ser úteis para identificar padrões de comportamento e necessidades dos moradores do local. É possível que seja necessário ajustar a configuração da iluminação para melhorar a eficiência energética ou adaptá-la às necessidades específicas do local.\n\nSe quiser analisar mais dados, por favor forneça outros dados!"
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz11",
+      "tempo_total_min": 1800.98,
+      "media_diaria_min": 150.08,
+      "ativacoes_total": 902,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 119.8,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.57,
+        "2026-05-04": 3.23,
+        "2026-05-05": 4.01,
+        "2026-05-06": 2.6,
+        "2026-05-07": 2.46,
+        "2026-05-11": 0.14,
+        "2026-05-18": 4.24,
+        "2026-05-19": 8.02,
+        "2026-05-20": 3.98,
+        "2026-05-26": 0.23,
+        "2026-05-28": 0.13,
+        "2026-05-29": 0.38
+      },
+      "events_per_day": {
+        "2026-04-24": 421,
+        "2026-05-04": 0,
+        "2026-05-05": 431,
+        "2026-05-06": 3,
+        "2026-05-07": 4,
+        "2026-05-11": 2,
+        "2026-05-18": 5,
+        "2026-05-19": 8,
+        "2026-05-20": 4,
+        "2026-05-26": 3,
+        "2026-05-28": 19,
+        "2026-05-29": 2
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "15": 6.15,
+          "16": 2063.62
+        },
+        "2026-05-04": {
+          "9": 7097.29,
+          "11": 4520.34
+        },
+        "2026-05-05": {
+          "9": 4.93,
+          "10": 52.64,
+          "12": 8894.52,
+          "13": 3555.71,
+          "14": 695.25,
+          "15": 1249.39
+        },
+        "2026-05-06": {
+          "8": 326.97,
+          "13": 1605.86,
+          "15": 7434.24
+        },
+        "2026-05-07": {
+          "9": 3057.66,
+          "11": 5797.26
+        },
+        "2026-05-11": {
+          "8": 25.32,
+          "9": 489.55
+        },
+        "2026-05-18": {
+          "10": 7823.33,
+          "15": 4609.62,
+          "16": 2837.59
+        },
+        "2026-05-19": {
+          "11": 7085.01,
+          "15": 9100.45,
+          "16": 3345.52,
+          "17": 46.99,
+          "19": 9307.47
+        },
+        "2026-05-20": {
+          "9": 3468.05,
+          "10": 3772.61,
+          "14": 2.07,
+          "16": 7102.28
+        },
+        "2026-05-26": {
+          "10": 835.14
+        },
+        "2026-05-28": {
+          "15": 321.3,
+          "16": 151.7
+        },
+        "2026-05-29": {
+          "8": 1373.18
+        }
+      },
+      "insight": "Vamos analisar os dados de iluminação!\n\n**Observações Gerais**\n\n* O sensor Luz11 está localizado na **Bathroom 1**.\n* A luz em Bathroom 1 foi ativada por aproximadamente **1800 minutos** no período de tempo disponível.\n* A média diária de ativação da luz é de **150,08 minutos**, o que sugere que a luz é usada com frequência ao longo do dia.\n\n**Detalhes Interessantes**\n\n* O número total de ativações da luz é de **902 vezes**. Isso pode indicar que a área onde está localizado o sensor Luz11 é muito utilizada.\n* O tempo médio de ativação da luz é de **119,8 segundos**, o que sugere que as pessoas provavelmente não deixam a luz ligada por longos períodos.\n\n**Ponto de Pico**\n\n* Infelizmente, o dado \"hora_pico\" está vazio. Isso significa que não há informações sobre quando exatamente a luz foi ativada com mais frequência no período de tempo disponível.\n\n**Alertas**\n\n* Não há alertas associados ao sensor Luz11.\n\nEssa análise fornece uma visão geral do uso da iluminação na **Bathroom 1**, incluindo o número total de ativações, média diária de uso e tempo médio de ativação. Além disso, não há sinais de alertas ou problemas relacionados ao sensor Luz11."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Luz12",
+      "tempo_total_min": 44.72,
+      "media_diaria_min": 3.73,
+      "ativacoes_total": 51,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 52.61,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.04,
+        "2026-05-04": 0.09,
+        "2026-05-05": 0.02,
+        "2026-05-06": 0.12,
+        "2026-05-07": 0.05,
+        "2026-05-11": 0.02,
+        "2026-05-18": 0.2,
+        "2026-05-19": 0.02,
+        "2026-05-20": 0.1,
+        "2026-05-21": 0.03,
+        "2026-05-26": 0.05,
+        "2026-05-28": 0.0
+      },
+      "events_per_day": {
+        "2026-04-24": 6,
+        "2026-05-04": 4,
+        "2026-05-05": 4,
+        "2026-05-06": 5,
+        "2026-05-07": 2,
+        "2026-05-11": 2,
+        "2026-05-18": 14,
+        "2026-05-19": 2,
+        "2026-05-20": 6,
+        "2026-05-21": 2,
+        "2026-05-26": 3,
+        "2026-05-28": 1
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "15": 148.05
+        },
+        "2026-05-04": {
+          "8": 64.2,
+          "10": 59.97,
+          "11": 60.82,
+          "13": 60.5,
+          "14": 60.64
+        },
+        "2026-05-05": {
+          "9": 53.38,
+          "10": 1.02,
+          "12": 25.13
+        },
+        "2026-05-06": {
+          "7": 60.55,
+          "13": 359.78
+        },
+        "2026-05-07": {
+          "8": 179.61
+        },
+        "2026-05-11": {
+          "8": 24.91,
+          "9": 59.88
+        },
+        "2026-05-18": {
+          "8": 60.9,
+          "9": 59.94,
+          "10": 65.24,
+          "13": 242.57,
+          "14": 58.37,
+          "15": 117.95,
+          "16": 119.37
+        },
+        "2026-05-19": {
+          "15": 60.16,
+          "17": 2.47
+        },
+        "2026-05-20": {
+          "8": 60.6,
+          "9": 60.34,
+          "10": 59.65,
+          "14": 120.85,
+          "16": 60.29
+        },
+        "2026-05-21": {
+          "12": 59.36,
+          "13": 59.79
+        },
+        "2026-05-26": {
+          "10": 119.64,
+          "13": 60.54
+        },
+        "2026-05-28": {
+          "15": 16.6
+        }
+      },
+      "insight": "Vamos analisar esses dados de iluminação!\n\n**Resumo Geral**\n\n* O sensor em questão é o \"Hallway\" (Luz12).\n* Ele está ligado por cerca de 44,72 horas ao total.\n* A média diária de uso é de aproximadamente 3,73 horas.\n* Foi ativado um total de 51 vezes.\n* Nenhuma ação foi registrada hoje.\n\n**Período de Ligação**\n\n* O período total de ligação é de cerca de **44,72 horas**, o que sugere que o Hallway é uma área comummente utilizada ou passagem importante na residência.\n* A média diária de uso de 3,73 horas indica que o Hallway provavelmente é utilizado regularmente ao longo do dia.\n\n**Nível de Uso**\n\n* Com **51 ativações**, podemos inferir que o Hallway é uma área bem utilizada e com grande movimento.\n* A média de tempo de ativação por evento é de cerca de 52,61 segundos. Isso sugere que os usuários do espaço estão passando rapidamente pela área.\n\n**Horário de Pico**\n\n* Não há registro de hora de pico (hora_pico=None). Isso pode indicar que o uso do Hallway é relativamente uniforme ao longo da jornada diária, sem um horário específico de maior atividade.\n\n**Alertas**\n\n* Nenhuma ação de alerta foi registrada (alertas = []).\n\nEm resumo, os dados sugerem que o Hallway é uma área bem utilizada e com grande movimento na residência."
+    },
+    {
+      "data_hoje": "2026-08-11",
+      "sensor": "Escadas",
+      "tempo_total_min": 61.94,
+      "media_diaria_min": 4.42,
+      "ativacoes_total": 65,
+      "ativacoes_hoje": 0,
+      "hora_pico": null,
+      "tempo_medio_ativacao_s": 57.18,
+      "alertas": [],
+      "tempo_em_horas_das_luzes_ligadas_por_dia": {
+        "2026-04-24": 0.02,
+        "2026-05-04": 0.14,
+        "2026-05-05": 0.09,
+        "2026-05-06": 0.17,
+        "2026-05-07": 0.09,
+        "2026-05-11": 0.01,
+        "2026-05-18": 0.15,
+        "2026-05-19": 0.07,
+        "2026-05-20": 0.1,
+        "2026-05-21": 0.07,
+        "2026-05-26": 0.07,
+        "2026-05-28": 0.03,
+        "2026-05-29": 0.02,
+        "2026-07-21": 0.02
+      },
+      "events_per_day": {
+        "2026-04-24": 1,
+        "2026-05-04": 12,
+        "2026-05-05": 9,
+        "2026-05-06": 7,
+        "2026-05-07": 4,
+        "2026-05-11": 2,
+        "2026-05-18": 11,
+        "2026-05-19": 5,
+        "2026-05-20": 5,
+        "2026-05-21": 3,
+        "2026-05-26": 4,
+        "2026-05-28": 2,
+        "2026-05-29": 0,
+        "2026-07-21": 0
+      },
+      "hourly_usage": {
+        "2026-04-24": {
+          "16": 63.49
+        },
+        "2026-05-04": {
+          "9": 7.75,
+          "10": 159.81,
+          "11": 173.48,
+          "13": 120.0,
+          "14": 60.5
+        },
+        "2026-05-05": {
+          "8": 13.5,
+          "10": 151.28,
+          "12": 10.88,
+          "13": 50.43,
+          "14": 50.17,
+          "15": 49.61
+        },
+        "2026-05-06": {
+          "7": 59.35,
+          "8": 60.9,
+          "13": 416.84,
+          "16": 62.31
+        },
+        "2026-05-07": {
+          "8": 247.2,
+          "13": 60.64
+        },
+        "2026-05-11": {
+          "8": 6.16,
+          "9": 11.89
+        },
+        "2026-05-18": {
+          "8": 59.06,
+          "9": 121.07,
+          "10": 6.79,
+          "13": 7.13,
+          "14": 60.31,
+          "15": 119.56,
+          "16": 179.87
+        },
+        "2026-05-19": {
+          "8": 60.15,
+          "15": 184.82,
+          "17": 13.95
+        },
+        "2026-05-20": {
+          "8": 122.25,
+          "9": 60.34,
+          "10": 60.7,
+          "14": 60.5,
+          "16": 60.5
+        },
+        "2026-05-21": {
+          "8": 60.78,
+          "12": 61.41,
+          "13": 60.42,
+          "14": 59.99
+        },
+        "2026-05-26": {
+          "10": 181.26,
+          "13": 60.1
+        },
+        "2026-05-28": {
+          "13": 59.71,
+          "15": 40.17
+        },
+        "2026-05-29": {
+          "9": 60.33
+        },
+        "2026-07-21": {
+          "15": 59.2
+        }
+      },
+      "insight": "Vamos analisar os dados de iluminação fornecidos!\n\n**Resumo dos Dados**\n\nOs dados referem-se à iluminação da \"Escadas\" (Stairs). Aqui estão as informações mais relevantes:\n\n* **Tempo total de iluminação**: 61,94 minutos\n* **Média diária de iluminação**: 4,42 minutos\n* **Número total de ativações**: 65\n* **Número de ativações hoje**: 0\n* **Hora do pico**: Nenhum valor (ou seja, não houve um momento de maior iluminação)\n* **Tempo médio de ativação**: 57,18 segundos\n* **Alertas**: Não há alertas registrados\n\n**Análise**\n\nCom base nos dados, podemos observar que a iluminação da \"Escadas\" (Stairs) é utilizada por cerca de 4 minutos e 22 segundos por dia em média. No entanto, houve um total de 65 ativações ao longo do tempo, o que sugere que há momentos em que a iluminação é necessária durante períodos mais prolongados.\n\nÉ interessante notar que não há nenhuma hora registrada como o pico de iluminação, o que pode sugerir que a iluminação da \"Escadas\" (Stairs) é utilizada de forma relativamente constante ao longo do dia.\n\n**Insights**\n\n1. A iluminação da \"Escadas\" (Stairs) é necessária por cerca de 4 minutos e 22 segundos por dia em média.\n2. Houveram momentos em que a iluminação foi necessária durante períodos mais prolongados, totalizando 65 ativações ao longo do tempo.\n3. Não há um momento específico registrado como o pico de iluminação.\n\nEssas são as análises e insights que posso oferecer com base nos dados fornecidos!"
+    }
+  ],
+  "motores": [
+    {
+      "motor": "Motor1",
+      "status": "Analisado",
+      "estatisticas": {
+        "current1": {
+          "media": 1.58,
+          "min": 0.0,
+          "max": 2.0,
+          "std": 0.77
+        },
+        "voltage1": {
+          "media": 176.56,
+          "min": 0.0,
+          "max": 228.0,
+          "std": 89.79
+        },
+        "rpm1": {
+          "media": 1165.3,
+          "min": 0.0,
+          "max": 1500.0,
+          "std": 593.95
+        },
+        "energy1": {
+          "media": 0.07,
+          "min": 0.0,
+          "max": 0.26,
+          "std": 0.07
+        },
+        "power1": {
+          "media": 0.46,
+          "min": 0.0,
+          "max": 0.79,
+          "std": 0.38
+        }
+      },
+      "consumo_total_kwh": 0.26,
+      "insights": "**Status:** NORMAL\n\n**Análise Técnica:**\n\nO motor \"Motor1\" apresenta estatísticas para os períodos entre 11/05/2026 às 16:10 e 21/07/2026 às 15:55, com um total de 410 registros analisados. As principais informações são as seguintes:\n\n- **Corrente (Current1)**:\n  - A média da corrente é de 1,58 A.\n  - O mínimo registrado foi de 0,00 A e o máximo atingido foi de 2,00 A.\n  - O desvio padrão da corrente está em 0,77 A.\n\n- **Tensão (Voltage1)**:\n  - A média da tensão é de 176,56 V.\n  - O mínimo registrado foi de 0,00 V e o máximo atingido foi de 228,00 V.\n  - O desvio padrão da tensão está em 89,79 V.\n\n- **RPM (rpm1)**:\n  - A média do RPM é de 1165,3 RPM.\n  - O mínimo registrado foi de 0,00 RPM e o máximo atingido foi de 1500,00 RPM.\n  - O desvio padrão do RPM está em 593,95 RPM.\n\n- **Energia (Energy1)**:\n  - A média da energia consumida é de 0,07 kWh.\n  - O mínimo registrado foi de 0,00 kWh e o máximo atingido foi de 0,26 kWh.\n  - O desvio padrão da energia está em 0,07 kWh.\n\n- **Potência (power1)**:\n  - A média da potência é de 0,46 kW.\n  - O mínimo registrado foi de 0,00 kW e o máximo atingido foi de 0,79 kW.\n  - O desvio padrão da potência está em 0,38 kW.\n\n**Eficiência Energética:**\n\nO consumo total de energia durante o período analisado foi de 0,26 kWh. A análise dos dados não indica anomalias significativas na eficiência energética do motor, considerando a faixa normal das estatísticas fornecidas.\n\n**Comportamento Operacional:**\n\n- **Estabilidade e Consistência do RPM:** O desvio padrão do RPM é alto (593,95 RPM), o que sugere inconsistências no funcionamento do motor em termos de velocidade rotativa. Isso pode indicar problemas mecânicos ou de controle.\n\n- **Comportamento da Carga e Anomalias:**\n  - A relação entre RPM, corrente e potência não é claramente anormal, mas a grande variação no RPM pode ser um sinal de sobrecarga, sobrecarga parcial, ou problemas mecânicos.\n  - Não há dados explícitos sobre comportamentos anormais específicos.\n\n- **Anomalias Elétricas e Mecânicas:**\n  - A análise dos dados não revela anomalias elétricas claras, mas a tensão variou significativamente (de 0,00 V até 228,00 V), o que pode ser um sinal de problemas no sistema de alimentação ou na própria máquina.\n  - As variações nos valores do RPM e corrente sugerem possíveis problemas mecânicos.\n\n**Insights de Manutenção:**\n\n- **Possíveis Problemas Mecânicos/Elétricos:** A análise sugere a necessidade de inspeções mais detalhadas para identificar possíveis causas das variações no RPM, corrente e tensão. Isso pode incluir revisões do sistema de alimentação, do motor em si, e dos componentes de controle.\n- **Ações Preventivas:** Recomenda-se que sejam realizadas inspeções preventivas regulares para identificar problemas antes que causem falhas maiores.\n\n**Recomendações:**\n\n- **Controle da Velocidade Rotativa (RPM):** Implementar controles mais precisos e robustos para manter o RPM dentro de faixas seguras.\n- **Verificação do Sistema de Alimentação:** Verificar a integridade do sistema elétrico, incluindo fios, circuitos e componentes de proteção.\n- **Manutenção Preventiva Regular:** Realizar inspeções periódicas para detectar possíveis problemas mecânicos ou elétricos antes que causem falhas.\n\n**Observações Finais:**\n\nO motor \"Motor1\" apresenta um funcionamento com variações significativas em RPM, corrente e tensão. Embora não haja indícios claros de anomalias, essas variações podem indicar problemas mecânicos ou elétricos que precisam ser investigados para garantir a segurança operacional e a eficiência do motor."
+    },
+    {
+      "motor": "Motor2",
+      "status": "Analisado",
+      "estatisticas": {
+        "current2": {
+          "media": 1.09,
+          "min": 0.0,
+          "max": 2.0,
+          "std": 0.99
+        },
+        "voltage2": {
+          "media": 110.51,
+          "min": 0.0,
+          "max": 227.0,
+          "std": 110.33
+        },
+        "rpm2": {
+          "media": 756.82,
+          "min": 0.0,
+          "max": 1500.0,
+          "std": 725.39
+        },
+        "energy2": {
+          "media": 0.07,
+          "min": 0.0,
+          "max": 0.57,
+          "std": 0.14
+        },
+        "power2": {
+          "media": 0.35,
+          "min": 0.0,
+          "max": 0.79,
+          "std": 0.38
+        }
+      },
+      "consumo_total_kwh": 0.57,
+      "insights": "**Status:** NORMAL\n\n**Análise Técnica:**\n\nO motor \"Motor2\" apresenta uma análise técnica detalhada a seguir:\n\n* **Corrente (I)**: A média da corrente é de 1,09 A, o que é considerado normal. No entanto, a desvio padrão é relativamente alto (0,99 A), indicando que há flutuações na corrente. O valor máximo registrado foi de 2,0 A, o que pode ser um sinal de sobrecarga. É importante monitorar a corrente para evitar danos ao motor.\n* **Tensão (U)**: A tensão média é de 110,51 V, o que está dentro dos limites normais. O valor máximo registrado foi de 227,0 V, o que pode indicar um problema com a fonte de alimentação ou na própria instalação.\n* **RPM**: A média do RPM é de 756,82, que está dentro da faixa normal. No entanto, a desvio padrão é alto (725,39), indicando flutuações no RPM. O valor máximo registrado foi de 1.500,0 RPM, o que pode ser um sinal de sobrecarga ou problema com a transmissão.\n* **Potência (P)**: A média da potência é de 0,35 W, o que está dentro dos limites normais. No entanto, a desvio padrão é alto (0,38), indicando flutuações na potência.\n* **Energia (E)**: A energia média é de 0,07 kWh, o que está dentro dos limites normais.\n\n**Eficiência Energética:**\n\nO consumo total de energia é de 0,57 kWh, o que está um pouco acima do esperado. A eficiência energética do motor pode ser considerada regular, mas a alta desvio padrão da corrente e RPM sugere que há oportunidades para melhorar.\n\n**Comportamento Operacional:**\n\nO motor apresenta flutuações significativas na corrente, RPM e potência, o que pode indicar problemas de manutenção ou ajustes necessários. Além disso, a alta tensão máxima registrada pode ser um sinal de problema com a fonte de alimentação.\n\n**Insights de Manutenção:**\n\n* **Possíveis problemas mecânicos:** A alta desvio padrão da RPM e corrente podem indicar problemas na transmissão ou ajustes necessários.\n* **Ações preventivas:** É recomendável verificar a transmissão e ajustá-la se necessário. Além disso, é importante monitorar a tensão e corrente para evitar sobrecargas.\n\n**Recomendações:**\n\n* **Verificar a transmissão e ajustá-la se necessário**\n* **Monitorar a tensão e corrente regularmente**\n* **Ajustar a potência de acordo com as necessidades do processo**\n* **Realizar manutenção preventiva regular para evitar problemas futuros**"
+    }
+  ],
+  "bombas": [
+    {
+      "bomba": "Sistema de Pressão",
+      "status": "Analisado",
+      "estatisticas_pressao": {
+        "media": 6.72,
+        "min": 0.0,
+        "max": 10.0,
+        "std": 1.44,
+        "field": "bar"
+      },
+      "estabilidade": "Muito variável",
+      "insights": "Com base nos dados fornecidos sobre o sistema de bomba de pressão, posso realizar uma análise técnica objetiva. Aqui estão os resultados:\n\n### Avaliação da Estabilidade da Pressão\nA estabilidade da pressão é classificada como \"Muito variável\" no próprio dado disponível. A média da pressão é de 6,72 bar, com valores que variam entre 0,0 e 10,0 bar (o mínimo pode ser um erro de medição, pois uma pressão zero é improvável em um sistema de bomba). O desvio padrão (σ) também é significativo, indicando uma grande dispersão nos dados.\n\n### Oscilações ou Quedas Anormais de Pressão\nEmbora a média da pressão esteja estável ao longo do período analisado, há oscilações notáveis. Por exemplo, às 14h (14:00) o valor da pressão é de apenas 5,57 bar, enquanto outras horas (como 9h e 15h) atingem valores mais próximos à média ou até mesmo maiores. Isso sugere que há possíveis quedas anormais de pressão em determinadas horas.\n\n### Relação entre Pressão e Custo Energético\nNão há uma relação explícita dada nos dados entre a pressão e o custo energético, apenas as estatísticas para cada um. No entanto, podemos observar que o custo energético médio é de 0,03 euros e o máximo atinge 0,1 euros, enquanto a pressão pode variar significativamente. O consumo total de energia durante o período foi de 9,58 euros.\n\n### Sinais Possíveis\n- **Sobrecarga:** Não há dados explícitos para detectar sobrecarga.\n- **Fugas no sistema:** Se as quedas anormais de pressão fossem causadas por fuga, seria um sinal importante. No entanto, não há informações suficientes para concluir isso com certeza.\n- **Funcionamento irregular:** Há evidências de oscilações na pressão que podem indicar funcionamento irregular.\n- **Perda de eficiência:** A grande variação da pressão sugere potencial perda de eficiência, especialmente se a bomba não está sendo operada dentro das suas especificações óptimas.\n- **Consumo excessivo:** Embora o custo energético médio seja relativamente baixo, o máximo atingido é significativo e pode sugerir um consumo acima do esperado em certas horas.\n\n### Identificação de Padrões de Utilização ao Longo do Dia\nO gráfico da pressão por hora sugere padrões de utilização que variam ao longo do dia. Às 12h, a pressão é significativamente maior (8,03 bar) em comparação com outras horas, sugerindo um aumento na demanda ou uso do sistema em momentos específicos.\n\n### Conclusão Técnica\nO sistema de bomba de pressão apresenta desempenho instável e com oscilações significativas. Embora a análise não forneça evidências diretas de sobrecarga, fuga ou consumo excessivo, há indícios de funcionamento irregular e potencial perda de eficiência. É recomendado realizar uma análise mais profunda dos dados, incluindo possíveis problemas de manutenção ou ajustes necessários para melhorar o desempenho do sistema.\n\nObservação: A falta de informações detalhadas sobre a bomba, como capacidade de produção e especificações técnicas, limita a precisão da análise. Além disso, os dados fornecidos não incluem medições diretas de consumo de energia associados à pressão específica em cada momento.",
+      "estatisticas_custo": {
+        "media": 0.03,
+        "min": 0.0,
+        "max": 0.1,
+        "std": 0.03,
+        "consumo_total": 9.58,
+        "field": "Custo_Energy"
+      },
+      "custo_field": "Custo_Energy"
+    }
+  ],
+  "timestamp_analise": "2026-08-11 16:40:51"
+}
