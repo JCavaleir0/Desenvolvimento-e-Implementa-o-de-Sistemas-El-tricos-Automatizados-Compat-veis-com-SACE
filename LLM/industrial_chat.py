@@ -9,11 +9,10 @@ from datetime import datetime, date
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
-# Usa este se já instalaste:
-#MODEL = "qwen2.5:14b"
+MODEL = "qwen2.5:14b"
 
-# Se ainda não instalaste o qwen, usa temporariamente:
-MODEL = "llama3.1:8b"
+
+#MODEL = "llama3.1:8b"
 
 RESULTADOS_FILE = "resultados.json"
 
@@ -151,19 +150,32 @@ def nome_amigavel(sensor):
 
 
 def detectar_equipamento(pergunta):
-    pergunta = pergunta.lower()
+    pergunta = normalizar_texto(pergunta)
+
+    todos_aliases = []
 
     for equipamento, info in NOMES_EQUIPAMENTOS.items():
+        todos_aliases.append(
+            (normalizar_texto(equipamento), equipamento)
+        )
 
-        if equipamento.lower() in pergunta:
-            return equipamento
-
-        if info["nome"].lower() in pergunta:
-            return equipamento
+        todos_aliases.append(
+            (normalizar_texto(info["nome"]), equipamento)
+        )
 
         for alias in info["aliases"]:
-            if alias.lower() in pergunta:
-                return equipamento
+            todos_aliases.append(
+                (normalizar_texto(alias), equipamento)
+            )
+
+    todos_aliases.sort(
+        key=lambda x: len(x[0]),
+        reverse=True
+    )
+
+    for alias, equipamento in todos_aliases:
+        if alias in pergunta:
+            return equipamento
 
     return None
 
@@ -326,6 +338,17 @@ def preparar_luzes_resumidas(luzes):
 def detectar_tipo(pergunta):
     p = pergunta.lower()
 
+    # 1. Verificar PRIMEIRO se é um pedido geral/global
+    if any(x in p for x in [
+        "fábrica", "fabrica", "tudo", "geral", 
+        "todos os sistemas", "resumo de toda","casa","resumo geral", 
+        "resumo de toda a casa","resumo de toda a fábrica", 
+        "resumo de toda a fabrica"
+        
+    ]):
+        return "geral"
+
+    # 2. Depois verifica os motores
     if any(x in p for x in [
         "motor", "motores", "rpm", "corrente",
         "potência", "potencia", "tensão", "tensao",
@@ -333,12 +356,14 @@ def detectar_tipo(pergunta):
     ]):
         return "motor"
 
+    # 3. Depois as bombas
     if any(x in p for x in [
         "bomba", "bombas", "pressão", "pressao", "bar",
         "água", "agua"
     ]):
         return "bomba"
 
+    # 4. Por fim a iluminação
     if any(x in p for x in [
         "luz", "luzes", "iluminação", "iluminacao",
         "lampada", "lâmpada", "lampadas", "lâmpadas",
@@ -347,7 +372,7 @@ def detectar_tipo(pergunta):
         "bathroom", "living", "kitchen", "bedroom",
         "ativações", "ativacoes", "ativação", "ativacao",
         "ligada", "ligado", "ativas", "ativo",
-        "tempo ligada", "tempo ligado"
+        "tempo ligada", "tempo ligado","cozinha?"
     ]):
         return "iluminacao"
 
@@ -766,9 +791,7 @@ def responder_iluminacao(pergunta, contexto):
 
     return "\n\n".join(linhas)
 
-# =========================
-# RESPOSTAS DIRETAS — MOTORES
-# =========================
+
 
 def resumir_motores(motores):
     if not motores:
@@ -859,7 +882,7 @@ def chamar_llm(pergunta, contexto_texto, chat_history):
     ])
 
     prompt = f"""
-És um assistente industrial SCADA.
+És um assistente de análise inteligente.
 
 Responde apenas à pergunta do utilizador.
 Não inventes dados.
@@ -889,7 +912,14 @@ REGRAS
 - Se não houver dados suficientes, diz claramente.
 - Não mistures motores com luzes.
 - Não mistures bombas com luzes.
+- Num resumo geral, menciona sempre as luzes, os motores e as bombas.
+- Mantém a formatação exata dos números e unidades do contexto (ex: se o contexto diz "4.06 h", escreve "4.06 h" e nunca "4h06").
 """
+
+
+    #print("\n========== PROMPT ENVIADO AO LLM ==========")
+    #print(prompt)
+    #print("===========================================\n")
 
     try:
         response = requests.post(
@@ -898,8 +928,8 @@ REGRAS
                 "model": MODEL,
                 "prompt": prompt,
                 "stream": False,
-                "options": {
-                    "temperature": 0.2,
+                "options": { 
+                    "temperature": 0.8,
                     "num_predict": 3000,
                     "top_p": 0.9,
                     "repeat_penalty": 1.1,
@@ -1188,6 +1218,12 @@ def iniciar_chat():
             break
 
         contexto = gerar_contexto(pergunta)
+        
+        
+        print("\n========== CONTEXTO ESTRUTURADO ==========")
+        import json
+        print(json.dumps(contexto, indent=4, ensure_ascii=False))
+        print("==========================================\n")
 
         resposta = perguntar_llm(
             pergunta,
@@ -1200,5 +1236,1045 @@ def iniciar_chat():
         print("==============================\n")
 
 
+
+
+
+# ============================================================
+# AVALIADOR ROBUSTO DA CONSULTA INTELIGENTE
+# ============================================================
+#
+# Coloque esta secção no fim do seu programa.
+# O avaliador:
+#   1) verifica tipo, intenção e equipamento;
+#   2) verifica o conteúdo da resposta com base nos dados reais;
+#   3) permite várias execuções por pergunta para avaliar estabilidade;
+#   4) separa erros de encaminhamento dos erros de resposta;
+#   5) gera um resumo global e por categoria.
+#
+# IMPORTANTE:
+# - As perguntas de teste devem representar casos diferentes.
+# - Não use apenas palavras-chave como critério principal.
+# - Os valores esperados são obtidos dos dados carregados quando possível.
+
+import re
+from collections import Counter, defaultdict
+
+
+# ------------------------------------------------------------
+# CONFIGURAÇÃO DA AVALIAÇÃO
+# ------------------------------------------------------------
+
+NUM_EXECUCOES = 3       # 3 execuções por pergunta
+MOSTRAR_RESPOSTAS = True # False para uma saída mais curta
+
+
+# ------------------------------------------------------------
+# UTILITÁRIOS DO AVALIADOR
+# ------------------------------------------------------------
+
+import unicodedata
+
+def normalizar_texto(texto):
+    """
+    Normaliza o texto para facilitar as comparações.
+
+    - Converte o texto para minúsculas;
+    - Remove acentos;
+    - Garante que o valor recebido é convertido para string.
+    """
+
+    if texto is None:
+        return ""
+
+    texto = str(texto).lower()
+
+    return ''.join(
+        c
+        for c in unicodedata.normalize('NFD', texto)
+        if unicodedata.category(c) != 'Mn'
+    )
+
+def obter_luz_por_sensor(dados, sensor):
+    """Obtém diretamente uma luz pelo identificador técnico."""
+    luzes = obter_lista_iluminacao(dados)
+
+    for luz in luzes:
+        if luz.get("sensor") == sensor:
+            return luz
+
+    return None
+
+
+def obter_motor_por_nome(dados, nome):
+    """Obtém diretamente um motor pelo nome."""
+    motores = obter_motores(dados)
+
+    for motor in motores:
+        if motor.get("motor") == nome:
+            return motor
+
+    return None
+
+
+def extrair_numeros(texto):
+    """
+    Extrai números de uma resposta, aceitando:
+      39.20
+      39,20
+      39
+      1.880
+    """
+    texto = str(texto)
+
+    encontrados = re.findall(
+        r"(?<![\w])\d+(?:[.,]\d+)?(?![\w])",
+        texto
+    )
+
+    valores = []
+
+    for item in encontrados:
+        try:
+            # Para números como 39,20 / 39.20
+            valor = float(item.replace(",", "."))
+            valores.append(valor)
+        except ValueError:
+            pass
+
+    return valores
+
+
+def numero_aparece(texto, esperado, tolerancia=0.01):
+    """Verifica se um valor numérico aparece na resposta."""
+    valores = extrair_numeros(texto)
+
+    return any(
+        abs(valor - float(esperado)) <= tolerancia
+        for valor in valores
+    )
+
+
+def inteiro_aparece(texto, esperado):
+    """
+    Verifica números inteiros, incluindo respostas como:
+    1880, 1.880 ou 1,880.
+    """
+    texto = str(texto)
+
+    esperado = int(esperado)
+
+    # Procura números escritos como inteiros
+    candidatos = re.findall(r"(?<!\w)\d[\d.,]*", texto)
+
+    for candidato in candidatos:
+        limpo = candidato.replace(".", "").replace(",", "")
+
+        if limpo.isdigit() and int(limpo) == esperado:
+            return True
+
+    return False
+
+
+def duracao_em_minutos(texto):
+    """
+    Extrai durações presentes numa resposta e converte-as para minutos.
+
+    Exemplos aceites:
+        39h 20min
+        39 h 20 min
+        39 horas 20 minutos
+        39 horas e 20 minutos
+        4h06
+        4 horas e 6 minutos
+        3.52 h
+        3,52 h
+    """
+
+    texto = normalizar_texto(texto)
+    resultados = []
+
+    # Padrão para horas e, opcionalmente, minutos
+    padrao_hm = re.compile(
+        r"(\d+(?:[.,]\d+)?)\s*"
+        r"(?:h|hora|horas)"
+        r"(?:\s*(?:e\s*)?(\d+(?:[.,]\d+)?)\s*"
+        r"(?:m|min|mins|minuto|minutos))?"
+    )
+
+    for correspondencia in padrao_hm.finditer(texto):
+
+        horas = float(
+            correspondencia.group(1).replace(",", ".")
+        )
+
+        minutos = 0.0
+
+        if correspondencia.group(2) is not None:
+            minutos = float(
+                correspondencia.group(2).replace(",", ".")
+            )
+
+        total_minutos = horas * 60 + minutos
+
+        resultados.append(total_minutos)
+
+    return resultados
+
+def duracao_confere(texto, minutos_esperados, tolerancia=0.6):
+    """
+    Verifica se a duração apresentada na resposta corresponde
+    à duração esperada.
+
+    A comparação é feita em minutos, independentemente do formato
+    utilizado pelo modelo de linguagem.
+
+    Exemplos equivalentes:
+        39h 20min
+        39 horas 20 minutos
+        39 horas e 20 minutos
+
+    A tolerância predefinida é de 0,6 minutos.
+    """
+
+    if minutos_esperados is None:
+        return False
+
+    try:
+        esperado = float(minutos_esperados)
+    except (TypeError, ValueError):
+        return False
+
+    duracoes_obtidas = duracao_em_minutos(texto)
+
+    for duracao in duracoes_obtidas:
+        if abs(duracao - esperado) <= tolerancia:
+            return True
+
+    return False
+
+
+def contem_algum(texto, alternativas):
+    """Verifica se pelo menos uma alternativa aparece."""
+    texto_norm = normalizar_texto(texto)
+
+    return any(
+        normalizar_texto(alternativa) in texto_norm
+        for alternativa in alternativas
+    )
+
+
+# ------------------------------------------------------------
+# VALIDAÇÃO DA INTENÇÃO / TIPO / EQUIPAMENTO
+# ------------------------------------------------------------
+
+def validar_encaminhamento(pergunta, contexto, teste):
+    """
+    Avalia apenas a parte realizada pelo programa antes do LLM.
+    """
+    erros = []
+
+    tipo_esperado = teste.get("tipo_esperado")
+    intencao_esperada = teste.get("intencao_esperada")
+    equipamento_esperado = teste.get("equipamento_esperado")
+
+    tipo_obtido = contexto.get("tipo")
+    intencao_obtida = contexto.get("intencao")
+    equipamento_obtido = contexto.get("equipamento")
+
+    if tipo_esperado is not None and tipo_obtido != tipo_esperado:
+        erros.append(
+            f"Tipo: esperado='{tipo_esperado}', obtido='{tipo_obtido}'"
+        )
+
+    if intencao_esperada is not None and intencao_obtida != intencao_esperada:
+        erros.append(
+            f"Intenção: esperada='{intencao_esperada}', obtida='{intencao_obtida}'"
+        )
+
+    if equipamento_obtido != equipamento_esperado:
+        erros.append(
+            f"Equipamento: esperado='{equipamento_esperado}', "
+            f"obtido='{equipamento_obtido}'"
+        )
+
+    return len(erros) == 0, erros
+
+
+# ------------------------------------------------------------
+# VALIDAÇÃO DA RESPOSTA DO LLM
+# ------------------------------------------------------------
+
+def validar_resposta_teste(resposta, teste, resultados):
+    """
+    Verifica o conteúdo da resposta com base no tipo de teste.
+    Retorna:
+      (True/False, [erros])
+    """
+    resposta_norm = normalizar_texto(resposta)
+    erros = []
+
+    regra = teste.get("regra")
+    equipamento = teste.get("equipamento_esperado")
+
+    # --------------------------------------------------------
+    # TERMOS OBRIGATÓRIOS
+    # --------------------------------------------------------
+    if regra == "termos":
+        for termo in teste.get("termos_obrigatorios", []):
+            if normalizar_texto(termo) not in resposta_norm:
+                erros.append(f"Termo em falta: '{termo}'")
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # AUSÊNCIA DE DADOS
+    # --------------------------------------------------------
+    if regra == "sem_dados":
+        termos = [
+            "sem dados",
+            "nao ha dados",
+            "não há dados",
+            "nao existem dados",
+            "não existem dados",
+            "dados insuficientes",
+            "não foi possível determinar",
+            "nao foi possivel determinar"
+        ]
+
+        if not contem_algum(resposta, termos):
+            erros.append("Não foi indicada claramente a ausência de dados.")
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # TEMPO TOTAL DE UMA LUZ
+    # --------------------------------------------------------
+    if regra == "tempo_total":
+
+        luz = obter_luz_por_sensor(
+            resultados,
+            equipamento
+        )
+
+        if luz is None:
+            return False, [
+                f"Não foi encontrada a luz '{equipamento}' nos dados."
+            ]
+
+        minutos_esperados = luz.get("tempo_total_min")
+
+        if minutos_esperados is None:
+            return False, [
+                "Não existe 'tempo_total_min' nos dados."
+            ]
+
+        # Verificar apenas se a duração apresentada está correta.
+        # Não é obrigatório que o LLM mencione o nome da luz,
+        # uma vez que o equipamento já foi identificado na pergunta
+        # e validado na fase de encaminhamento.
+
+        if not duracao_confere(
+            resposta,
+            minutos_esperados
+        ):
+            erros.append(
+                f"Tempo esperado: {formatar_minutos(minutos_esperados)}"
+            )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # ATIVAÇÕES DE UMA LUZ
+    # --------------------------------------------------------
+    if regra == "ativacoes":
+        luz = obter_luz_por_sensor(resultados, equipamento)
+
+        if luz is None:
+            return False, [f"Não foi encontrada a luz '{equipamento}' nos dados."]
+
+        esperado = luz.get("ativacoes_total")
+
+        if esperado is None:
+            return False, ["Não existe 'ativacoes_total' nos dados."]
+
+        if not inteiro_aparece(resposta, esperado):
+            erros.append(
+                f"Ativações esperadas: {int(esperado)}"
+            )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # RANKING DE ATIVAÇÕES
+    # --------------------------------------------------------
+    if regra == "ranking_ativacoes_maior":
+        luzes = preparar_luzes_resumidas(
+            obter_lista_iluminacao(resultados)
+        )
+
+        if not luzes:
+            return False, ["Não existem dados de iluminação."]
+
+        top = max(
+            luzes,
+            key=lambda x: x["ativacoes_total"]
+        )
+
+        esperado_sensor = top["sensor_original"]
+        esperado_nome = top["sensor"]
+        esperado_ativacoes = top["ativacoes_total"]
+
+        if not contem_algum(
+            resposta,
+            [esperado_sensor, esperado_nome]
+        ):
+            erros.append(
+                f"Equipamento esperado no ranking: {esperado_nome}"
+            )
+
+        if not inteiro_aparece(resposta, esperado_ativacoes):
+            erros.append(
+                f"Ativações esperadas: {esperado_ativacoes}"
+            )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # RANKING DE TEMPO
+    # --------------------------------------------------------
+    if regra == "ranking_tempo_maior":
+        luzes = preparar_luzes_resumidas(
+            obter_lista_iluminacao(resultados)
+        )
+
+        if not luzes:
+            return False, ["Não existem dados de iluminação."]
+
+        top = max(
+            luzes,
+            key=lambda x: x["tempo_total_min"]
+        )
+
+        esperado_nome = top["sensor"]
+        esperado_tempo = top["tempo_total_min"]
+
+        if not contem_algum(
+            resposta,
+            [top["sensor_original"], esperado_nome]
+        ):
+            erros.append(
+                f"Equipamento esperado: {esperado_nome}"
+            )
+
+        if not duracao_confere(resposta, esperado_tempo):
+            erros.append(
+                f"Tempo esperado: {formatar_minutos(esperado_tempo)}"
+            )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # HORA DE PICO
+    # --------------------------------------------------------
+    if regra == "hora_pico":
+        luz = obter_luz_por_sensor(resultados, equipamento)
+
+        if luz is None:
+            return False, [f"Luz '{equipamento}' não encontrada."]
+
+        hora_esperada = luz.get("hora_pico")
+
+        # Se não existir valor, a resposta deve reconhecer isso.
+        if hora_esperada is None:
+            termos = [
+                "sem dados",
+                "nao ha dados",
+                "não há dados",
+                "nao foi possivel",
+                "não foi possível",
+                "indisponivel",
+                "indisponível"
+            ]
+
+            if not contem_algum(resposta, termos):
+                erros.append(
+                    "Era esperado indicar que não existem dados de hora de pico."
+                )
+
+            return len(erros) == 0, erros
+
+        if str(hora_esperada).lower() not in resposta_norm:
+            erros.append(
+                f"Hora de pico esperada: {hora_esperada}"
+            )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # TEMPO NUM DIA ESPECÍFICO
+    # --------------------------------------------------------
+    if regra == "tempo_data":
+        luz = obter_luz_por_sensor(resultados, equipamento)
+
+        if luz is None:
+            return False, [f"Luz '{equipamento}' não encontrada."]
+
+        data = teste.get("data")
+        tempos = luz.get(
+            "tempo_em_horas_das_luzes_ligadas_por_dia",
+            {}
+        )
+
+        if data not in tempos:
+            # Se não existir, a resposta deve indicar ausência de dados.
+            if not contem_algum(
+                resposta,
+                ["sem dados", "não há dados", "nao ha dados"]
+            ):
+                erros.append(
+                    f"Não existem dados para a data {data} e isso não foi indicado."
+                )
+
+            return len(erros) == 0, erros
+
+        horas_esperadas = float(tempos[data])
+
+        if not duracao_confere(
+            resposta,
+            horas_esperadas * 60,
+            tolerancia=0.6
+        ):
+            erros.append(
+                f"Tempo esperado em {data}: {formatar_horas(horas_esperadas)}"
+            )
+
+        # É útil confirmar a data.
+        dia_str = str(int(data.split("-")[2]))
+        if dia_str not in resposta_norm and data not in resposta_norm:
+            erros.append(
+                f"Data/dia esperado na resposta: {data}"
+            )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # RESUMO DOS MOTORES
+    # --------------------------------------------------------
+    if regra == "motores_resumo":
+        motores = obter_motores(resultados)
+
+        if not motores:
+            return False, ["Não existem dados dos motores."]
+
+        for motor in motores:
+            nome = motor.get("motor", "")
+            if nome and normalizar_texto(nome) not in resposta_norm:
+                erros.append(f"Motor em falta: {nome}")
+
+            if "consumo_total_kwh" in motor:
+                valor = motor["consumo_total_kwh"]
+
+                if not numero_aparece(resposta, valor):
+                    erros.append(
+                        f"{nome}: consumo esperado={valor} kWh"
+                    )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # POTÊNCIA E RPM
+    # --------------------------------------------------------
+    if regra == "motores_potencia_rpm":
+        motores = obter_motores(resultados)
+
+        if not motores:
+            return False, ["Não existem dados dos motores."]
+
+        for motor in motores:
+            nome = motor.get("motor", "")
+            stats = motor.get("estatisticas", {})
+
+            potencia = stats.get("potencia", {})
+            rpm = stats.get("velocidade", stats.get("rpm", {}))
+
+            # Tentar algumas designações possíveis do JSON.
+            if not potencia:
+                potencia = stats.get("potencia_kw", {})
+
+            if not rpm:
+                rpm = stats.get("velocidade_rotacao", {})
+
+            if nome and normalizar_texto(nome) not in resposta_norm:
+                erros.append(f"Motor em falta: {nome}")
+
+            if isinstance(potencia, dict) and "media" in potencia:
+                if not numero_aparece(resposta, potencia["media"]):
+                    erros.append(
+                        f"{nome}: potência média esperada={potencia['media']}"
+                    )
+
+            if isinstance(rpm, dict) and "media" in rpm:
+                if not numero_aparece(resposta, rpm["media"]):
+                    erros.append(
+                        f"{nome}: RPM médio esperado={rpm['media']}"
+                    )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # BOMBAS
+    # --------------------------------------------------------
+    if regra == "bombas":
+        bombas = obter_bombas(resultados)
+
+        if not bombas:
+            return False, ["Não existem dados das bombas."]
+
+        for bomba in bombas:
+            estado = bomba.get("status")
+
+            if estado is not None and normalizar_texto(str(estado)) not in resposta_norm:
+                erros.append(f"Estado esperado: {estado}")
+
+            pressao = bomba.get("estatisticas_pressao", {})
+
+            if isinstance(pressao, dict):
+                for chave in ("media", "min", "max"):
+                    if chave in pressao:
+                        if not numero_aparece(resposta, pressao[chave]):
+                            erros.append(
+                                f"Pressão {chave} esperada={pressao[chave]} bar"
+                            )
+
+        return len(erros) == 0, erros
+
+    # --------------------------------------------------------
+    # RESUMO GERAL
+    # --------------------------------------------------------
+    if regra == "geral":
+        categorias = {
+            "luzes": ["luz", "luzes", "iluminacao", "iluminação"],
+            "motores": ["motor", "motores"],
+            "bombas": ["bomba", "bombas", "pressao", "pressão"],
+        }
+
+        for categoria, termos in categorias.items():
+            if not contem_algum(resposta, termos):
+                erros.append(
+                    f"Categoria não mencionada: {categoria}"
+                )
+
+        return len(erros) == 0, erros
+
+    return False, [f"Regra de teste desconhecida: {regra}"]
+
+
+# ------------------------------------------------------------
+# CASOS DE TESTE
+# ------------------------------------------------------------
+#
+# NOTA:
+# "intencao_esperada" é agora avaliada separadamente.
+# Os critérios da resposta são baseados nos valores dos dados.
+#
+# Podes aumentar este conjunto para 20, 30 ou mais perguntas.
+# ------------------------------------------------------------
+
+TESTES = [
+    {
+        "id": 1,
+        "categoria": "Iluminação - tempo",
+        "pergunta": "Quantas horas esteve ligada a luz da cozinha?",
+        "tipo_esperado": "iluminacao",
+        "intencao_esperada": "tempo",
+        "equipamento_esperado": "Luz3",
+        "regra": "tempo_total",
+    },
+    {
+        "id": 2,
+        "categoria": "Iluminação - ranking ativações",
+        "pergunta": "Qual foi a luz com maior número de ativações?",
+        "tipo_esperado": "iluminacao",
+        "intencao_esperada": "ranking_ativacoes_maior",
+        "equipamento_esperado": None,
+        "regra": "ranking_ativacoes_maior",
+    },
+    {
+        "id": 3,
+        "categoria": "Bombagem - estado",
+        "pergunta": "Como está o estado das bombas?",
+        "tipo_esperado": "bomba",
+        "intencao_esperada": "resumo",
+        "equipamento_esperado": None,
+        "regra": "bombas",
+    },
+    {
+        "id": 4,
+        "categoria": "Iluminação - tempo",
+        "pergunta": "Quanto tempo esteve ligada a luz da cozinha?",
+        "tipo_esperado": "iluminacao",
+        "intencao_esperada": "tempo",
+        "equipamento_esperado": "Luz3",
+        "regra": "tempo_total",
+    },
+    {
+        "id": 5,
+        "categoria": "Iluminação - ativações",
+        "pergunta": "Quantas vezes a luz da sala de máquinas foi ativada?",
+        "tipo_esperado": "iluminacao",
+        "intencao_esperada": "ativacoes",
+        "equipamento_esperado": "Luz5",
+        "regra": "ativacoes",
+    },
+    {
+        "id": 6,
+        "categoria": "Iluminação - ranking tempo",
+        "pergunta": "Qual foi a luz que esteve mais tempo ligada?",
+        "tipo_esperado": "iluminacao",
+        "intencao_esperada": "ranking_tempo_maior",
+        "equipamento_esperado": None,
+        "regra": "ranking_tempo_maior",
+    },
+    {
+        "id": 7,
+        "categoria": "Iluminação - hora de pico",
+        "pergunta": "Diz-me a hora de pico do quarto 1.",
+        "tipo_esperado": "iluminacao",
+        "intencao_esperada": "hora_pico",
+        "equipamento_esperado": "Luz8",
+        "regra": "hora_pico",
+    },
+    {
+        "id": 8,
+        "categoria": "Iluminação - data específica",
+        "pergunta": "Tempo da luz da garagem no dia 19",
+        "tipo_esperado": "iluminacao",
+        "intencao_esperada": "tempo",
+        "equipamento_esperado": "Luz7",
+        "regra": "tempo_data",
+        # Ajusta o ano/mês se os teus dados mudarem.
+        "data": "2026-05-19",
+    },
+    {
+        "id": 9,
+        "categoria": "Motores - resumo",
+        "pergunta": "Faz um resumo do estado atual dos motores.",
+        "tipo_esperado": "motor",
+        "intencao_esperada": "resumo",
+        "equipamento_esperado": None,
+        "regra": "motores_resumo",
+    },
+    {
+        "id": 10,
+        "categoria": "Motores - potência e RPM",
+        "pergunta": "Qual é a potência e os rpm dos motores?",
+        "tipo_esperado": "motor",
+        "intencao_esperada": "geral",
+        "equipamento_esperado": None,
+        "regra": "motores_potencia_rpm",
+    },
+    {
+        "id": 11,
+        "categoria": "Bombagem - estado",
+        "pergunta": "Como estão as bombas de água?",
+        "tipo_esperado": "bomba",
+        "intencao_esperada": "resumo",
+        "equipamento_esperado": None,
+        "regra": "bombas",
+    },
+    {
+        "id": 12,
+        "categoria": "Bombagem - falhas",
+        "pergunta": "Houve alguma falha de pressão nas bombas?",
+        "tipo_esperado": "bomba",
+        "intencao_esperada": "alertas",
+        "equipamento_esperado": None,
+        "regra": "bombas",
+    },
+    {
+        "id": 13,
+        "categoria": "Geral",
+        "pergunta": "Faz um resumo de toda a casa, como estão as luzes e as máquinas?",
+        "tipo_esperado": "geral",
+        "intencao_esperada": "resumo",
+        "equipamento_esperado": None,
+        "regra": "geral",
+    },
+]
+
+
+# ------------------------------------------------------------
+# EXECUÇÃO DO AVALIADOR
+# ------------------------------------------------------------
+
+import time  # Importar o módulo time
+
+def avaliar_acerto_chatbot():
+    print("\n" + "=" * 70)
+    print("INÍCIO DA AVALIAÇÃO AUTOMÁTICA")
+    print("=" * 70)
+
+    resultados = carregar_resultados()
+
+    if not resultados:
+        print("ERRO: não foi possível carregar resultados.json.")
+        return
+
+    total_testes = len(TESTES) * NUM_EXECUCOES
+    total_passou = 0
+    
+    # Lista para registar os tempos de todas as execuções
+    todos_os_tempos = [] 
+
+    resultados_individuais = []
+    por_categoria = defaultdict(lambda: {"total": 0, "passou": 0})
+
+    print(
+        f"\nPerguntas: {len(TESTES)} | "
+        f"Execuções por pergunta: {NUM_EXECUCOES} | "
+        f"Total de avaliações: {total_testes}\n"
+    )
+
+    for teste in TESTES:
+
+        passes_teste = 0
+        erros_teste = []
+        tempos_do_teste = [] # Regista tempos apenas deste teste
+
+        for execucao in range(1, NUM_EXECUCOES + 1):
+
+            chat_history = []
+
+            contexto = gerar_contexto(teste["pergunta"])
+
+            encaminhamento_ok, erros_encaminhamento = validar_encaminhamento(
+                teste["pergunta"],
+                contexto,
+                teste
+            )
+
+            # ============================================================
+            # MEDIÇÃO DO TEMPO DE RESPOSTA
+            # ============================================================
+            inicio = time.time()
+
+            resposta = perguntar_llm(
+                teste["pergunta"],
+                contexto,
+                chat_history
+            )
+
+            tempo_execucao = time.time() - inicio
+            tempos_do_teste.append(tempo_execucao)
+            todos_os_tempos.append(tempo_execucao)
+            # ============================================================
+
+            resposta_ok, erros_resposta = validar_resposta_teste(
+                resposta,
+                teste,
+                resultados
+            )
+
+            passou = encaminhamento_ok and resposta_ok
+
+            if passou:
+                total_passou += 1
+                passes_teste += 1
+
+            por_categoria[teste["categoria"]]["total"] += 1
+
+            if passou:
+                por_categoria[teste["categoria"]]["passou"] += 1
+
+            resultados_individuais.append({
+                "teste": teste["id"],
+                "categoria": teste["categoria"],
+                "execucao": execucao,
+                "passou": passou,
+                "encaminhamento_ok": encaminhamento_ok,
+                "resposta_ok": resposta_ok,
+                "tempo_s": tempo_execucao
+            })
+
+            if not passou:
+                erros_teste.append({
+                    "execucao": execucao,
+                    "encaminhamento": erros_encaminhamento,
+                    "resposta": erros_resposta,
+                    "resposta_texto": resposta,
+                })
+
+            if MOSTRAR_RESPOSTAS:
+                print("\n" + "-" * 70)
+                print(
+                    f"Teste {teste['id']} | "
+                    f"Execução {execucao}/{NUM_EXECUCOES}"
+                )
+                print(f"Categoria: {teste['categoria']}")
+                print(f"Pergunta: {teste['pergunta']}")
+                print(f"Tipo: {contexto.get('tipo')}")
+                print(f"Intenção: {contexto.get('intencao')}")
+                print(f"Equipamento: {contexto.get('equipamento')}")
+                print(f"Tempo de Resposta: {tempo_execucao:.2f} s")
+                print(f"Resultado: {'PASSOU' if passou else 'FALHOU'}")
+                print("Resposta:")
+                print(resposta)
+
+                if erros_encaminhamento:
+                    print("Erros de encaminhamento:")
+                    for erro in erros_encaminhamento:
+                        print(f"  - {erro}")
+
+                if erros_resposta:
+                    print("Erros da resposta:")
+                    for erro in erros_resposta:
+                        print(f"  - {erro}")
+
+        estabilidade = (
+            "ESTÁVEL - passou em todas as execuções"
+            if passes_teste == NUM_EXECUCOES
+            else
+            "INSTÁVEL - passou em algumas execuções"
+            if passes_teste > 0
+            else
+            "FALHOU - não passou em nenhuma execução"
+        )
+
+        media_tempo_teste = sum(tempos_do_teste) / len(tempos_do_teste)
+
+        print("\n" + "=" * 70)
+        print(
+            f"Teste {teste['id']} - "
+            f"{passes_teste}/{NUM_EXECUCOES} -> {estabilidade} | "
+            f"Tempo médio: {media_tempo_teste:.2f} s"
+        )
+        print("=" * 70)
+
+    # --------------------------------------------------------
+    # RESULTADO GLOBAL COM MÉDIA DE TEMPOS
+    # --------------------------------------------------------
+
+    taxa_global = (
+        total_passou / total_testes * 100
+        if total_testes
+        else 0
+    )
+
+    media_tempo_global = (
+        sum(todos_os_tempos) / len(todos_os_tempos)
+        if todos_os_tempos
+        else 0
+    )
+
+    print("\n\n" + "=" * 70)
+    print("RESULTADO GLOBAL")
+    print("=" * 70)
+
+    print(
+        f"Respostas corretas: {total_passou}/{total_testes}"
+    )
+    print(
+        f"Taxa global de sucesso: {taxa_global:.1f}%"
+    )
+    print(
+        f"Tempo médio de resposta global: {media_tempo_global:.2f} segundos"
+    )
+
+    # --------------------------------------------------------
+    # RESULTADOS POR CATEGORIA
+    # --------------------------------------------------------
+
+    print("\nRESULTADOS POR CATEGORIA")
+    print("-" * 70)
+
+    for categoria, valores in sorted(por_categoria.items()):
+        taxa = (
+            valores["passou"] / valores["total"] * 100
+            if valores["total"]
+            else 0
+        )
+
+        print(
+            f"{categoria}: "
+            f"{valores['passou']}/{valores['total']} "
+            f"({taxa:.1f}%)"
+        )
+
+    # --------------------------------------------------------
+    # ESTABILIDADE E TEMPOS POR PERGUNTA
+    # --------------------------------------------------------
+
+    print("\nESTABILIDADE E TEMPO MÉDIO POR PERGUNTA")
+    print("-" * 70)
+
+    for teste in TESTES:
+        resultados_teste = [
+            x for x in resultados_individuais
+            if x["teste"] == teste["id"]
+        ]
+
+        passou = sum(
+            1 for x in resultados_teste if x["passou"]
+        )
+        
+        media_tempo = sum(
+            x["tempo_s"] for x in resultados_teste
+        ) / len(resultados_teste)
+
+        print(
+            f"Teste {teste['id']:02d}: "
+            f"{passou}/{NUM_EXECUCOES} | "
+            f"Tempo médio: {media_tempo:.2f} s"
+        )
+
+    # --------------------------------------------------------
+    # RESUMO PARA A DISSERTAÇÃO
+    # --------------------------------------------------------
+
+    perguntas_estaveis = 0
+    perguntas_instaveis = 0
+    perguntas_falhadas = 0
+
+    for teste in TESTES:
+        resultados_teste = [
+            x for x in resultados_individuais
+            if x["teste"] == teste["id"]
+        ]
+
+        passou = sum(
+            1 for x in resultados_teste if x["passou"]
+        )
+
+        if passou == NUM_EXECUCOES:
+            perguntas_estaveis += 1
+        elif passou == 0:
+            perguntas_falhadas += 1
+        else:
+            perguntas_instaveis += 1
+
+    print("\nRESUMO")
+    print("-" * 70)
+    print(
+        f"Perguntas estáveis: {perguntas_estaveis}/{len(TESTES)}"
+    )
+    print(
+        f"Perguntas instáveis: {perguntas_instaveis}/{len(TESTES)}"
+    )
+    print(
+        f"Perguntas que falharam em todas as execuções: "
+        f"{perguntas_falhadas}/{len(TESTES)}"
+    )
+    print(
+        f"Tempo médio global: {media_tempo_global:.2f} s"
+    )
+
+    print("\n" + "=" * 70)
+    print("FIM DA AVALIAÇÃO")
+    print("=" * 70 + "\n")
+
 if __name__ == "__main__":
     iniciar_chat()
+    #avaliar_acerto_chatbot()
+
+
+
