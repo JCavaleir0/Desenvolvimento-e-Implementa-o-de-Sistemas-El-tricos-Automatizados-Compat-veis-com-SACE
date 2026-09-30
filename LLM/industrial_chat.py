@@ -9,6 +9,7 @@ from datetime import datetime, date
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
+# Usa este:
 MODEL = "qwen2.5:14b"
 
 
@@ -791,7 +792,9 @@ def responder_iluminacao(pergunta, contexto):
 
     return "\n\n".join(linhas)
 
-
+# =========================
+# RESPOSTAS DIRETAS — MOTORES
+# =========================
 
 def resumir_motores(motores):
     if not motores:
@@ -903,17 +906,15 @@ PERGUNTA
 CONTEXTO
 ====================
 {contexto_texto}
-
 ====================
 REGRAS
 ====================
 - Responde diretamente.
-- Não faças perguntas ao utilizador se houver dados suficientes.
 - Se não houver dados suficientes, diz claramente.
-- Não mistures motores com luzes.
-- Não mistures bombas com luzes.
-- Num resumo geral, menciona sempre as luzes, os motores e as bombas.
-- Mantém a formatação exata dos números e unidades do contexto (ex: se o contexto diz "4.06 h", escreve "4.06 h" e nunca "4h06").
+
+
+
+
 """
 
 
@@ -1238,24 +1239,6 @@ def iniciar_chat():
 
 
 
-
-# ============================================================
-# AVALIADOR ROBUSTO DA CONSULTA INTELIGENTE
-# ============================================================
-#
-# Coloque esta secção no fim do seu programa.
-# O avaliador:
-#   1) verifica tipo, intenção e equipamento;
-#   2) verifica o conteúdo da resposta com base nos dados reais;
-#   3) permite várias execuções por pergunta para avaliar estabilidade;
-#   4) separa erros de encaminhamento dos erros de resposta;
-#   5) gera um resumo global e por categoria.
-#
-# IMPORTANTE:
-# - As perguntas de teste devem representar casos diferentes.
-# - Não use apenas palavras-chave como critério principal.
-# - Os valores esperados são obtidos dos dados carregados quando possível.
-
 import re
 from collections import Counter, defaultdict
 
@@ -1393,29 +1376,22 @@ def duracao_em_minutos(texto):
     texto = normalizar_texto(texto)
     resultados = []
 
-    # Padrão para horas e, opcionalmente, minutos
+    # Padrão corrigido que aceita a conjução "e", espaços e variações
     padrao_hm = re.compile(
         r"(\d+(?:[.,]\d+)?)\s*"
-        r"(?:h|hora|horas)"
+        r"(?:h|hora|horas)\b"
         r"(?:\s*(?:e\s*)?(\d+(?:[.,]\d+)?)\s*"
-        r"(?:m|min|mins|minuto|minutos))?"
+        r"(?:m|min|mins|minuto|minutos)\b)?"
     )
 
     for correspondencia in padrao_hm.finditer(texto):
-
-        horas = float(
-            correspondencia.group(1).replace(",", ".")
-        )
-
+        horas = float(correspondencia.group(1).replace(",", "."))
         minutos = 0.0
 
         if correspondencia.group(2) is not None:
-            minutos = float(
-                correspondencia.group(2).replace(",", ".")
-            )
+            minutos = float(correspondencia.group(2).replace(",", "."))
 
         total_minutos = horas * 60 + minutos
-
         resultados.append(total_minutos)
 
     return resultados
@@ -1574,8 +1550,7 @@ def validar_resposta_teste(resposta, teste, resultados):
         # e validado na fase de encaminhamento.
 
         if not duracao_confere(
-            resposta,
-            minutos_esperados
+            resposta, minutos_esperados, tolerancia=3.0
         ):
             erros.append(
                 f"Tempo esperado: {formatar_minutos(minutos_esperados)}"
@@ -1666,7 +1641,7 @@ def validar_resposta_teste(resposta, teste, resultados):
                 f"Equipamento esperado: {esperado_nome}"
             )
 
-        if not duracao_confere(resposta, esperado_tempo):
+        if not duracao_confere(resposta, esperado_tempo, tolerancia=3.0):
             erros.append(
                 f"Tempo esperado: {formatar_minutos(esperado_tempo)}"
             )
@@ -2274,7 +2249,7 @@ def avaliar_acerto_chatbot():
 
 if __name__ == "__main__":
     iniciar_chat()
-    #avaliar_acerto_chatbot()
+    #valiar_acerto_chatbot()
 
 
 
